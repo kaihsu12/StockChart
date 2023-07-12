@@ -1,0 +1,26 @@
+.label {
+  font-family: Noto Sans TC;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-top: 18px;
+}
+
+.input {
+  width: 472px;
+  height: 54px;
+  outline: solid 1px #e0e0e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  margin-top: 0.97vh;
+  font-size: 16px;
+  padding: 14px;
+  &::placeholder {
+    color: var(--gray-500);
+  }
+  &:focus {
+    border: 1px solid rgba(90, 64, 164, 1);
+  }
+}
