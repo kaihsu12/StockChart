@@ -1,0 +1,56 @@
+.dailySummary {
+  width: 322px;
+  padding: 22px;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+
+  .mainInfo {
+    .title {
+      color: var(--secondary-gray);
+    }
+
+    .sum {
+      display: flex;
+      align-items: center;
+      color: var(--secondary-green);
+      gap: 12px;
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 14px;
+
+      span:last-child {
+        display: flex;
+        align-items: center;
+        img {
+          margin-left: 6px;
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 24px;
+
+    span {
+      display: flex;
+      p:first-child {
+        color: var(--secondary-gray);
+      }
+
+      p:last-child {
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .btn {
+    width: 100%;
+    height: 42px;
+  }
+}
