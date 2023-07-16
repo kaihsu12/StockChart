@@ -1,0 +1,17 @@
+.label {
+  margin: 0;
+}
+
+.primary-input {
+  height: 42px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+  padding: 11px 14px;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  width: 100%;
+  &::placeholder {
+    color: var(--secondary-gray);
+  }
+}

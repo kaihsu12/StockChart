@@ -1,21 +1,61 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 16px;
-}
+  padding: 0 38px;
+  width: 100%;
+  height: 72px;
+  border-bottom: 1px solid var(--border-gray);
 
-.backButton {
-  margin-right: 19px;
-  cursor: pointer;
-}
+  .date {
+    span:last-child {
+      padding-left: 6px;
+      color: var(--secondary-gray);
+    }
+  }
 
-.userInfo {
-  display: flex;
-  flex-direction: column;
+  .widgetSec {
+    display: flex;
+    gap: 18px;
+    margin-left: auto;
+    margin-right: 0;
 
-  .tweetCount {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--Secondary);
+    .bellWidget {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--background-gray);
+      img {
+        width: 18px;
+        height: 100%;
+      }
+    }
+
+    .userWidget {
+      display: flex;
+      align-items: center;
+
+      .userImg {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: 50% 50%;
+      }
+
+      .userInfo {
+        margin-left: 12px;
+        p:first-child {
+          color: var(--primary-purple);
+        }
+
+        p:last-child {
+          color: var(--secondary-gray);
+        }
+      }
+    }
   }
 }

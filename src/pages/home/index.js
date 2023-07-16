@@ -6,9 +6,10 @@ import LoginPage from '../loginPage/loginPage';
 import SignupPage from '../signupPage/signupPage';
 import AdminLoginPage from '../adminLoginPage/adminLoginPage';
 import MainPage from '../mainPage/mainPage';
+import DiaryPage from '../diaryPage/DiaryPage';
 // style
-import './reset.scss'
-import './base.scss'
+import './reset.scss';
+import './base.scss';
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
           <Route path='signup' element={<SignupPage />} />
           <Route path='admin' element={<AdminLoginPage />} />
           <Route path='main' element={<MainPage />} />
+          <Route path='diary' element={<DiaryPage />} />
         </Routes>
       </BrowserRouter>
     </div>
