@@ -1,3 +1,4 @@
+
 .diaryContainer {
   display: flex;
   width: 100%;
@@ -6,6 +7,7 @@
     display: flex;
   }
   .rightContainer {
+
     display: flex;
     flex-direction: column;
     margin: 72px 0 38px 38px;
@@ -26,6 +28,7 @@
         height: 16px;
       }
     }
+
     .inputSec {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -41,6 +44,7 @@
       }
     }
     .dailySec {
+
       display: flex;
       gap: 12px;
       margin-top: 32px;

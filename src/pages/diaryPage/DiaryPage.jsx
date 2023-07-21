@@ -1,18 +1,21 @@
+
 // react
 import { useState, useEffect } from 'react';
 // package
 import Swal from 'sweetalert2';
 // component
+
 import PrimaryInput from '../../components/primaryInput/PrimaryInput';
 import Header from '../../components/header/Header';
 import DailySummary from '../../components/dailySummary/DailySummary';
 import DailyRecord from '../../components/dailyRecord/DailyRecord';
+
 import Navbar from '../../components/navbar/Navbar';
 // api
 import { createDiary, getTransactions } from '../../api/diary';
 // icon
+
 import arrowIcon from '../../assets/arrow-purple.svg';
-// style
 import './DiaryPage.scss';
 
 const DiaryPage = () => {
@@ -77,6 +80,7 @@ const DiaryPage = () => {
   }, [todayTransactions]);
 
   return (
+
     <div className='diaryContainer'>
       <div className='navbarSection'>
         <Navbar />
@@ -130,6 +134,7 @@ const DiaryPage = () => {
           <div className='listSec'>
             <DailyRecord todayTransactions={todayTransactions} date={date} />
             <DailySummary />
+
           </div>
         </div>
       </div>
