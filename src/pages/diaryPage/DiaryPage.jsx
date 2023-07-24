@@ -65,6 +65,15 @@ const DiaryPage = () => {
     //   console.log(res); // 觀察資料用
 
 
+    //   const newData = res.data.transactions.map((item, index) => ({
+    //     ...item,
+    //     listNumber: index + 1,
+    //   }));
+    //   setTodayTransactions(newData);
+    // };
+    // transactionData();
+
+
       const newData = res.data.result.transactionsArray.map((item, index) => ({
         ...item,
         listNumber: index + 1,
@@ -72,6 +81,7 @@ const DiaryPage = () => {
       setTodayTransactions(newData);
     };
     transactionData();
+
 
   }, [switcher]);
 
