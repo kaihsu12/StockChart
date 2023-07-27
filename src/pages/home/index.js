@@ -1,7 +1,6 @@
 // react
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// page
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // page
 import LoginPage from '../loginPage/LoginPage';
 import SignupPage from '../signupPage/SignupPage';
 import AdminLoginPage from '../adminLoginPage/AdminLoginPage';
@@ -18,19 +17,19 @@ const basename = process.env.PUBLIC_URL;
 const Home = () => {
   return (
     <div>
-      <BrowserRouter basename={basename}>
+      <Router basename={basename}>
         {/* <AuthProvider> */}
         <Routes>
           <Route path='*' element={<LoginPage />} />
-          <Route path='signup' element={<SignupPage />} />
-          <Route path='admin' element={<AdminLoginPage />} />
-          <Route path='main' element={<MainPage />} />
-          <Route path='diary' element={<DiaryPage />} />
-          <Route path='history' element={<HistoryPage />} />
-          <Route path='dashboard' element={<DashboardPage />} />
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/admin' element={<AdminLoginPage />} />
+          <Route path='/main' element={<MainPage />} />
+          <Route path='/diary' element={<DiaryPage />} />
+          <Route path='/history' element={<HistoryPage />} />
+          <Route path='/dashboard' element={<DashboardPage />} />
         </Routes>
         {/* </AuthProvider> */}
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
