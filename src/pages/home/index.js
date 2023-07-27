@@ -13,10 +13,12 @@ import DashboardPage from '../dashboardPage/DashboardPage';
 import './reset.scss';
 import './base.scss';
 
+const basename = process.env.PUBLIC_URL;
+
 const Home = () => {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         {/* <AuthProvider> */}
         <Routes>
           <Route path='*' element={<LoginPage />} />
