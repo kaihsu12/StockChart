@@ -1,29 +1,21 @@
 .rankingList {
-  width: 312px;
+  width: 300px;
   padding: 0 20px;
-
-  padding-bottom: 20px;
+  padding-bottom: 22px;
   border: 1px solid var(--border-gray);
   border-radius: 4px;
   background-color: white;
+  height: fit-content;
   .title {
     padding: 20px 0;
     border-bottom: 1px solid var(--border-gray);
     color: var(--primary-purple);
-
   }
   .rankingMain {
     .userItem {
       display: flex;
       align-items: center;
-
-      padding-top: 20px;
-
-      .star {
-        width: 16px;
-        height: 16px;
-        margin-right: 14px;
-      }
+      padding-top: 22px;
 
       .userWidget {
         .userInfo {
