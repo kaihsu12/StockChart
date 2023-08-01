@@ -1,13 +1,13 @@
 // react
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // package
 import Swal from 'sweetalert2';
 // component
-import PurpleButton from '../../components/button/whiteButton/WhiteButton';
+import PurpleButton from '../../components/button/purpleButton/PurpleButton';
 import Input from '../../components/input/Input';
-// api
-import { register } from '../../api/auth';
+// context
+import { useAuth } from '../../contexts/AuthContext';
 // icons
 import logo from '../../assets/logo.svg';
 // styles
@@ -20,6 +20,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const navigate = useNavigate();
+  const { register, isAuthenticated } = useAuth();
 
   const handleSubmit = async () => {
     if (username.length === 0 || password.length === 0 || email.length === 0) {
@@ -34,7 +35,7 @@ const SignupPage = () => {
     }
 
     try {
-      const { success } = await register({
+      const success = await register({
         account,
         username,
         password,
@@ -49,19 +50,35 @@ const SignupPage = () => {
           icon: 'success',
           showConfirmButton: true,
         });
-        navigate('/*');
+      } else {
+        Swal.fire({
+          position: 'top',
+          title: '註冊失敗!',
+          icon: 'error',
+          showConfirmButton: true,
+        });
       }
     } catch (error) {
       console.error('[Registration]:', error);
     }
   };
+  const handleNavigate = () => {
+    navigate('/login');
+  }
+
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/*');
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <div className='container'>
       <div className='loginLeftContainer'></div>
       <div className='loginContainer'>
         <div className='loginPrompt'>
-          您已經有帳號了嗎? <a>立即登入</a>
+          您已經有帳號了嗎? <a  onClick={handleNavigate}>立即登入</a>
         </div>
         <div className='title'>
           <img src={logo} alt='' />
