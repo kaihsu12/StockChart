@@ -17,6 +17,7 @@ export const DashBoard = ({
   winCount,
   lossCount,
   pAndL, // 總損益
+  netPAndL, 
   roundTrip, // 總趟次
   riskRatio, // 盈虧比
 }) => {
@@ -28,6 +29,7 @@ export const DashBoard = ({
     const temData = transactions?.map?.((item) => ({
       date: item.date.slice(5, 10),
       pandl: item.cumulative_pandl ?? 0,
+      trip: item.round_trip,
     }));
     setNewData(temData);
   }, [transactions]);
@@ -37,7 +39,7 @@ export const DashBoard = ({
     <>
       <div className='dashBoardContainer'>
         <TopIncome
-          pAndL={pAndL}
+          netPAndL={netPAndL}
           riskRatio={riskRatio}
           averageLossPoints={averageLossPoints}
           averageWinPoints={averageWinPoints}
