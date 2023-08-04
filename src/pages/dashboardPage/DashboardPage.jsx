@@ -1,6 +1,6 @@
 // react
 import { useState, useEffect } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // component
 import DashBoard from '../../components/dashboard/DashBoard';
 import Header from '../../components/header/Header';
@@ -8,7 +8,7 @@ import Navbar from '../../components/navbar/Navbar';
 // context
 import { useAuth } from '../../contexts/AuthContext';
 // api
-import { getTransactions } from '../../api/diary';
+import { getTotalHistory } from '../../api/history';
 // style
 import './DashboardPage.scss';
 
@@ -29,36 +29,40 @@ const DashboardPage = () => {
 
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
+  const id = currentMember?.id;
 
   useEffect(() => {
     const transactionData = async () => {
-      const dateString = new Date().toLocaleDateString();
-      const res = await getTransactions({
-        startDate: '2023-07-10',
-        endDate: '2023-08-27',
-      });
-      console.log(res); // 觀察資料用
-      setData(res);
-      setTransactions(res.data.result.transactionsArray);
-      setWinRate(res.data.result.winRate);
-      setTotalWinPoints(res.data.result.totalWinPoints);
-      setTotalLossPoints(res.data.result.totalLossPoints);
-      setPAndL(res.data.result.pAndL);
-      setRoundTrip(res.data.result.roundTrip);
-      setNetPAndL(res.data.result.netPAndL);
-      setAverageLossPoints(res.data.result.averageLossPoints);
-      setAverageWinPoints(res.data.result.averageWinPoints);
-      setRiskRatio(res.data.result.riskRatio);
-      setWinCount(res.data.result.winCount);
-      setLossCount(res.data.result.lossCount);
+      try {
+        const res = await getTotalHistory({
+          id: id,
+        });
+        console.log(res); // 觀察資料用
+        setData(res);
+        setTransactions(res.dailyTransactions);
+        setWinRate(res.historyData.winRate);
+        setTotalWinPoints(res.historyData.totalWinPoints);
+        setTotalLossPoints(res.historyData.totalLossPoints);
+        setPAndL(res.historyData.pAndL);
+        setRoundTrip(res.historyData.roundTrip);
+        setNetPAndL(res.historyData.netPAndL);
+        setAverageLossPoints(res.historyData.averageLossPoints);
+        setAverageWinPoints(res.historyData.averageWinPoints);
+        setRiskRatio(res.historyData.riskRatio);
+        setWinCount(res.historyData.winCount);
+        setLossCount(res.historyData.lossCount);
+      } catch (error) {
+        console.error(error);
+      }
     };
     transactionData();
   }, []);
-  
+
   // 觀察資料用
   useEffect(() => {
     console.log(data);
+    console.log(transactions);
   }, [data]);
 
   useEffect(() => {

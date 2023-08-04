@@ -9,10 +9,11 @@ import Header from '../../components/header/Header';
 import DailySummary from '../../components/dailySummary/DailySummary';
 import DailyRecord from '../../components/dailyRecord/DailyRecord';
 import Navbar from '../../components/navbar/Navbar';
+import PositiveAndNegativeBarChart from '../../components/dashboard/PositiveAndNegativeBarChart/PositiveAndNegativeBarChart';
 // context
 import { useAuth } from '../../contexts/AuthContext';
 // api
-import { createDiary, getTransactions } from '../../api/diary';
+import { createDiary, getTodaysTransactionsData } from '../../api/diary';
 // icon
 import arrowIcon from '../../assets/arrow-purple.svg';
 import './DiaryPage.scss';
@@ -25,11 +26,13 @@ const DiaryPage = () => {
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [todayTransactions, setTodayTransactions] = useState('');
+  const [lineChartData, setLineChartData] = useState([]);
   const [switcher, setSwitcher] = useState(false); // 用於判斷是否有資料送出
 
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
+  const id = currentMember?.id;
 
   const handleSubmit = async () => {
     const res = await createDiary({
@@ -59,28 +62,34 @@ const DiaryPage = () => {
   };
 
   useEffect(() => {
-    const dateString = new Date().toLocaleDateString();
+    const dateString = new Date().toLocaleDateString(); // 2023/8/2
     setDate(dateString);
-    const transactionData = async () => {
-      const res = await getTransactions({
-        startDate: dateString,
-        endDate: dateString,
+    const getLineChartData = async () => {
+      const res = await getTodaysTransactionsData({
+        id: id,
+        date: date,
       });
       console.log(res); // 觀察資料用
 
-      const newData = res.data.result.transactionsArray.map((item, index) => ({
+      const newData = res.transactions?.map((item, index) => ({
         ...item,
         listNumber: index + 1,
       }));
       setTodayTransactions(newData);
+
+      const temData = res.transactions?.map((item) => ({
+        date: item.transaction_date.slice(5, 10),
+        pandl: item.pandl ?? 0,
+      }));
+      setLineChartData(temData);
     };
-    transactionData();
+    getLineChartData();
   }, [switcher]);
 
   // 觀察資料用
   useEffect(() => {
-    console.log(todayTransactions);
-  }, [todayTransactions]);
+    console.log(lineChartData);
+  }, [lineChartData]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -138,7 +147,9 @@ const DiaryPage = () => {
           </button>
         </div>
         <div className='dailySec'>
-          <div className='dailyDiagram'></div>
+          <div className='dailyDiagram'>
+            <PositiveAndNegativeBarChart transactions={lineChartData} />
+          </div>
           <div className='listSec'>
             <DailyRecord todayTransactions={todayTransactions} date={date} />
             <DailySummary />

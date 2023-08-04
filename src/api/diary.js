@@ -20,3 +20,15 @@ export const getTransactions = async (data) => {
     return error;
   }
 };
+
+export const getTodaysTransactionsData = async ({ id, date }) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `${baseUrl}/users/${id}/byDate?date=${date}`
+    );
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('[Get History failed]: ', error);
+  }
+};

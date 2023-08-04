@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import './LineChartSection.scss';
 import {
   LineChart,
@@ -8,12 +7,13 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from 'recharts';
 
 const CustomizedDot = (props) => {
   const { cx, cy, value } = props;
 
-  if (value > 80) {
+  if (value > 0) {
     return (
       <svg
         x={cx - 10}
@@ -41,39 +41,38 @@ const CustomizedDot = (props) => {
 };
 
 export const LineChartSection = ({ transactions }) => {
-  const [newData, setNewData] = useState([]);
-  console.log(transactions);
-  useEffect(() => {
-    const temData = transactions.map((item) => ({
-      date: item.transaction_date.slice(5, 10),
-      pandl: item.pandl ?? 0,
-    }));
-    setNewData(temData);
-  }, [transactions ]);
-  console.log(newData);
+  // 將交易資料轉換成數字陣列，方便計算 y 軸的 domain
+  const pandlValues = transactions?.map((transaction) =>
+    Number(transaction.pandl)
+  );
+
+  const yAxisDomain = [0, Math.max(...pandlValues) ];
+
   return (
-    <LineChart
-      width={600}
-      height={400}
-      data={newData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}>
-      <CartesianGrid strokeDasharray='3 3' />
-      <XAxis dataKey='date' />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line
-        type='monotone'
-        dataKey='pandl'
-        stroke='#8884d8'
-        dot={<CustomizedDot />}
-      />
-    </LineChart>
+    <ResponsiveContainer width='100%' height='100%'>
+      <LineChart
+        width={600}
+        height={400}
+        data={transactions}
+        margin={{
+          top: 30,
+          right: 30,
+          left: 0,
+          bottom: 0,
+        }}>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='date' />
+        <YAxis domain={yAxisDomain} />
+        <Tooltip />
+        <Legend />
+        <Line
+          type='monotone'
+          dataKey='pandl'
+          stroke='#8884d8'
+          // dot={<CustomizedDot />} // 這裡可以拿來用作標示用途
+        />
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 export default LineChartSection;
