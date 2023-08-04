@@ -67,7 +67,7 @@ const DiaryPage = () => {
     const getLineChartData = async () => {
       const res = await getTodaysTransactionsData({
         id: id,
-        date: '2023/8/4',
+        date: date,
       });
       console.log(res); // 觀察資料用
 
