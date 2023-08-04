@@ -1,6 +1,6 @@
 // react
 import React, { useState, useEffect } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // component
 import HistoryForm from '../../components/historyForm/HistoryForm';
 import Header from '../../components/header/Header';
@@ -19,7 +19,7 @@ import './HistoryPage.scss';
 const HistoryPage = () => {
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
 
   // Get the first and last days of the month
   const date = new Date();
@@ -78,7 +78,7 @@ const HistoryPage = () => {
       }${endDate.getDate()}`;
 
       const history = await getHistory({
-        id: 1,
+        id: currentMember.id,
         startDate: formatStartDate,
         endDate: formatEndDate,
       });
@@ -117,7 +117,7 @@ const HistoryPage = () => {
       }${lastDayOfNextMonth.getDate()}`;
 
       const history = await getHistory({
-        id: 1,
+        id: currentMember.id,
         startDate: formatStartDate,
         endDate: formatEndDate,
       });
@@ -156,7 +156,7 @@ const HistoryPage = () => {
       }${lastDayOfPrevMonth.getDate()}`;
 
       const history = await getHistory({
-        id: 1,
+        id: currentMember.id,
         startDate: formatStartDate,
         endDate: formatEndDate,
       });
@@ -172,7 +172,7 @@ const HistoryPage = () => {
     const getHistoryAsync = async () => {
       try {
         const history = await getHistory({
-          id: 1,
+          id: currentMember.id,
           startDate: defaultStartdate,
           endDate: defaultEnddate,
         });
@@ -191,7 +191,7 @@ const HistoryPage = () => {
       navigate('/login');
     }
   }, [navigate, isAuthenticated]);
-  
+
   return (
     <>
       <div className='historyPage'>
@@ -226,17 +226,20 @@ const HistoryPage = () => {
               </div>
               <button
                 className='btn primary-button bold-16'
-                onClick={handleSearchHistory}>
+                onClick={handleSearchHistory}
+              >
                 查詢
               </button>
               <button
                 className='btn secondary-button bold-16'
-                onClick={handlePrevMonth}>
+                onClick={handlePrevMonth}
+              >
                 上個月
               </button>
               <button
                 className='btn secondary-button bold-16'
-                onClick={handleNextMonth}>
+                onClick={handleNextMonth}
+              >
                 下個月
               </button>
             </div>
