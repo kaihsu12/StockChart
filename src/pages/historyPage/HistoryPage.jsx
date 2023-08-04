@@ -78,7 +78,7 @@ const HistoryPage = () => {
       }${endDate.getDate()}`;
 
       const history = await getHistory({
-        id: 1,
+        id: currentMember.id,
         startDate: formatStartDate,
         endDate: formatEndDate,
       });
@@ -117,7 +117,7 @@ const HistoryPage = () => {
       }${lastDayOfNextMonth.getDate()}`;
 
       const history = await getHistory({
-        id: 1,
+        id: currentMember.id,
         startDate: formatStartDate,
         endDate: formatEndDate,
       });
@@ -172,7 +172,7 @@ const HistoryPage = () => {
     const getHistoryAsync = async () => {
       try {
         const history = await getHistory({
-          id: 1,
+          id: currentMember.id,
           startDate: defaultStartdate,
           endDate: defaultEnddate,
         });
