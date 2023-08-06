@@ -74,8 +74,8 @@ const EditTradeModal = () => {
               </div>
             </div>
             <div className='modalBtn'>
-              <button className='secondary-button bold-16'>刪除</button>
-              <button className='primary-button bold-16'>修改交易</button>
+              <button className='btn secondary-button bold-16'>刪除</button>
+              <button className='btn primary-button bold-16'>修改交易</button>
             </div>
           </div>
         </div>
