@@ -21,12 +21,10 @@
 
   .modal-container {
     background: #ffffff;
-    padding: 16px 26px 26px 26px;
     border-radius: 4px;
     width: 600px;
     border: 1px solid var(--border-gray);
     position: absolute;
-    padding: 0;
 
     .top {
       display: flex;
@@ -151,7 +149,7 @@
         margin-top: 20px;
         gap: 16px;
 
-        button {
+        .btn {
           flex: 1;
           height: 42px;
         }
