@@ -12,6 +12,8 @@ import { formatDate } from '../../timeSwitcher/timeSwitcher';
 
 const Header = () => {
   const { currentMember } = useAuth();
+  const username = currentMember?.name;
+  const userAccount = currentMember?.account;
 
   // to output day of week
   const date = new Date();
@@ -40,11 +42,8 @@ const Header = () => {
         <div className='userWidget'>
           <img className='userImg' src={userImg} alt='user-img' />
           <span className='userInfo'>
-            <p className='bold-14'>
-              {currentMember.name?.slice(0, 1).toUpperCase() +
-                currentMember.name?.slice(1)}
-            </p>
-            <p className='regular-14'>@{currentMember.account}</p>
+            <p className='bold-14'>{username}</p>
+            <p className='regular-14'>@{userAccount}</p>
           </span>
         </div>
       </div>
