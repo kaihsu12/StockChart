@@ -45,12 +45,13 @@ export const deleteTransaction = async (id) => {
   }
 };
 
-export const putTransaction = async ({ id, transaction }) => {
+export const putTransaction = async ({ tradeId, transaction }) => {
   console.log(transaction);
   try {
-    const res = await axiosInstance.put(`${baseUrl}/transactions/${id}`, {
-      transaction,
-    });
+    const res = await axiosInstance.put(
+      `${baseUrl}/transactions/${tradeId}`,
+      transaction
+    );
     console.log(res);
     return res;
   } catch (error) {
