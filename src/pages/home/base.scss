@@ -109,6 +109,17 @@ body {
   }
 }
 
+.tertiary-button {
+  background: #ffffff;
+  color: var(--secondary-gray);
+  border: 1.5px solid var(--secondary-gray);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(106, 75, 193, 0.06);
+  }
+}
+
 /* 使用者頭像和名稱 */
 .userWidget {
   display: flex;

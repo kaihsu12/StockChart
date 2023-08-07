@@ -40,6 +40,7 @@
         position: absolute;
         right: 26px;
         margin-top: 1.5px;
+        cursor: pointer;
       }
     }
 
@@ -142,6 +143,14 @@
           }
         }
       }
+    }
+
+    .green {
+      color: var(--secondary-green);
+    }
+
+    .red {
+      color: var(--secondary-red);
     }
   }
 }

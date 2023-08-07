@@ -58,6 +58,7 @@
           .react-datepicker-wrapper {
             padding-left: 10px;
             z-index: 1;
+            width: 100%;
             .react-datepicker__input-container {
               display: flex;
               align-items: center;
@@ -66,7 +67,7 @@
                 padding: 0;
                 font-size: 14px;
                 font-weight: 500;
-                width: 140px;
+                width: 100%;
               }
             }
           }
