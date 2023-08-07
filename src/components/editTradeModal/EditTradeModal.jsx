@@ -32,7 +32,7 @@ const EditTradeModal = ({
   const [action, setAction] = useState(actionType);
   const [tradeQuantity, setTradeQuantity] = useState(quantity);
   const [tradePrice, setTradePrice] = useState(price);
-  const [transactionDate, setTransactionDate] = useState(new Date(tradeTime));
+  const [transactionDate, setTransactionDate] = useState('');
   const [description, setDescription] = useState(content);
 
   const tradeType = () => {
@@ -62,24 +62,23 @@ const EditTradeModal = ({
     }
   };
 
-  const handlePostTrade = async () => {
+  const handlePutTrade = async () => {
     const tradeDate = formatDateForApi(transactionDate);
     const type = tradeType();
-    const transaction = {
-      action: type,
-      quantity: tradeQuantity,
-      price: tradePrice,
-      transaction_date: tradeDate,
-      description: description,
-    };
 
     try {
-      // const res = await putTransaction({
-      //   id: tradeId,
-      //   transaction,
-      // });
+      const res = await putTransaction({
+        tradeId,
+        transaction: {
+          action: type,
+          quantity: tradeQuantity,
+          price: tradePrice,
+          transaction_date: tradeDate,
+          description: description,
+        },
+      });
 
-      // console.log(res);
+      console.log(res);
 
       // setTodayTransactions?.((trades) => {
       //   return trades.map((trade) => {
@@ -177,7 +176,7 @@ const EditTradeModal = ({
                 </button>
                 <button
                   className='btn primary-button bold-16'
-                  onClick={handlePostTrade}
+                  onClick={handlePutTrade}
                 >
                   修改交易
                 </button>
