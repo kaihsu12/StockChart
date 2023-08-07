@@ -37,6 +37,7 @@ const DiaryPage = () => {
   const [lineChartData, setLineChartData] = useState([]);
   const [switcher, setSwitcher] = useState(false); // 用於判斷是否有資料送出
   const [dailyTradeSummary, setDailyTradeSummary] = useState('');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -131,11 +132,19 @@ const DiaryPage = () => {
       </div>
       <div className='rightContainer'>
         <Header />
-        <div className='collapse'>
+        <div
+          className={`collapse ${isCollapsed ? 'collapsed' : ''}`}
+          onClick={() => setIsCollapsed(!isCollapsed)}>
           <span className='bold-16'>隱藏輸入表單</span>
-          <img className='arrow' src={arrowIcon} alt='arrow-icon' />
+          <img
+            className={`arrow ${isCollapsed ? 'flipped' : ''}`}
+            src={arrowIcon}
+            alt='arrow-icon'
+          />
         </div>
-        <div className='inputSec'>
+        <div
+          className={`inputSec ${isCollapsed ? 'collapsed' : ''}`}
+          style={{ display: isCollapsed ? 'none' : 'grid' }}>
           <TradeSelector action={action} setAction={setAction} />
           <div className='dateInput'>
             <div className='label bold-14'>日期</div>
@@ -167,7 +176,9 @@ const DiaryPage = () => {
             onChange={setQuantity}
           />
         </div>
-        <div className='remark'>
+        <div
+          className={`remark ${isCollapsed ? 'collapsed' : ''}`}
+          style={{ display: isCollapsed ? 'none' : 'flex' }}>
           <div className='label bold-14'>備註</div>
           <textarea
             className='modalText medium-14'
@@ -176,7 +187,9 @@ const DiaryPage = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div className='btnSec'>
+        <div
+          className={`btnSec ${isCollapsed ? 'collapsed' : ''}`}
+          style={{ display: isCollapsed ? 'none' : 'flex' }}>
           <button className='btn secondary-button bold-16'>載入資料</button>
           <button className='btn primary-button bold-16' onClick={handleSubmit}>
             送出

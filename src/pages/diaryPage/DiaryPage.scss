@@ -21,9 +21,39 @@
       color: var(--primary-purple);
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border-gray);
+      cursor: pointer;
       .arrow {
         width: 16px;
         height: 16px;
+        transition: transform 0.3s ease;
+      }
+      &.collapsed .arrow {
+        transform: rotate(180deg);
+      }
+    }
+
+    .inputSec,
+    .remark,
+    .btnSec {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      animation: zoom 0.5s;
+
+      @keyframes zoom {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 100;
+        }
+      }
+
+      &.collapsed {
+        max-height: 0;
+        margin: 0;
+        padding: 0;
+        display: none;
       }
     }
 
@@ -120,14 +150,9 @@
       }
     }
 
-    .btnSec {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-      .btn {
-        width: 200px;
-        height: 42px;
-      }
+    .btn {
+      width: 200px;
+      height: 42px;
     }
 
     .dailySec {
