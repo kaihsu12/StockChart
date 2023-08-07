@@ -17,7 +17,7 @@ export const DashBoard = ({
   winCount,
   lossCount,
   pAndL, // 總損益
-  netPAndL, 
+  netPAndL,
   roundTrip, // 總趟次
   riskRatio, // 盈虧比
 }) => {
