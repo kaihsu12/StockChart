@@ -203,6 +203,7 @@ const HistoryPage = () => {
               <div className='datePicker'>
                 <img src={clockIcon} alt='clock-icon' />
                 <DatePicker
+                  className='picker'
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   dateFormat='yyyy/MM/dd'
