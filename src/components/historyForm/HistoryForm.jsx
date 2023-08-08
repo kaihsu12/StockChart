@@ -6,6 +6,11 @@ import './HistoryForm.scss';
 import { formatDate } from '../../timeSwitcher/timeSwitcher';
 
 const HistoryForm = ({ dailytrades, tradeSum }) => {
+  const netPAndLSum = tradeSum?.netPAndL === null ? '0' : tradeSum?.netPAndL;
+  const itemNumber = dailytrades?.length === 0 ? 1 : dailytrades?.length;
+  const roundTripSum = tradeSum?.roundTrip === 0 ? 1 : tradeSum?.roundTrip;
+  const winRateSum = (tradeSum?.winRate * 100).toFixed(0);
+
   return (
     <div className='historyForm'>
       <div className='titleBody'>
@@ -31,24 +36,21 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
           const winRate = (trade?.win_rate * 100).toFixed(0);
 
           const riskRatio = Number(trade?.risk_ratio)?.toFixed(2);
-          // trade.risk_ratio?.slice(0, 4) === '0'
-          //   ? '0.00'
-          //   : trade.risk_ratio?.slice(0, 4);
+
+          const netpandl = trade?.netpandl === null ? '0' : trade.netpandl;
 
           return (
             <ul key={`trade-${i}`}>
-              <li>{formatDate(trade?.date)}</li>
-              <li className={trade?.netpandl?.includes('-') ? 'red' : 'green'}>
-                {trade.netpandl?.includes('-')
-                  ? trade?.netpandl
-                  : `+${trade?.netpandl}`}
+              <li>{trade?.date === null ? '0' : formatDate(trade?.date)}</li>
+              <li className={netpandl?.includes('-') ? 'red' : 'green'}>
+                {netpandl?.includes('-') ? netpandl : `+${netpandl}`}
               </li>
 
-              <li className='green'>{winRate}%</li>
-              <li>{riskRatio}</li>
-              <li>{trade?.round_trip}</li>
-              <li>{trade?.wincount}</li>
-              <li>{trade?.losscount}</li>
+              <li className='green'>{winRate === null ? '0' : winRate}%</li>
+              <li>{riskRatio === null ? '0' : riskRatio}</li>
+              <li>{trade?.round_trip === null ? '0' : trade?.round_trip}</li>
+              <li>{trade?.wincount === null ? '0' : trade?.wincount}</li>
+              <li>{trade?.losscount === null ? '0' : trade?.losscount}</li>
               <li>
                 <img src={msgIcon} alt='message-icon' />
               </li>
@@ -59,17 +61,13 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
       <div className='subBody regular-14'>
         <ul>
           <li className='bold-14'>累積</li>
-          <li
-            className={
-              String(tradeSum?.netPAndL).includes('-') ? 'red' : 'green'
-            }
-          >
-            {String(tradeSum?.netPAndL).includes('-')
-              ? tradeSum?.netPAndL
-              : `+${tradeSum?.netPAndL}`}
+          <li className={String(netPAndLSum).includes('-') ? 'red' : 'green'}>
+            {String(netPAndLSum).includes('-')
+              ? netPAndLSum
+              : `+${netPAndLSum}`}
           </li>
           <li></li>
-          <li>{tradeSum?.roundTrip}</li>
+          <li>{tradeSum?.roundTrip === null ? '0' : tradeSum?.roundTrip}</li>
           <li></li>
           <li></li>
           <li></li>
@@ -82,11 +80,11 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
               String(tradeSum?.netPAndL).includes('-') ? 'red' : 'green'
             }
           >
-            {String(tradeSum?.netPAndL).includes('-')
-              ? (tradeSum?.netPAndL / dailytrades.length).toFixed(2)
-              : `+${(tradeSum?.netPAndL / dailytrades.length).toFixed(2)}`}
+            {String(netPAndLSum).includes('-')
+              ? (netPAndLSum / itemNumber).toFixed(0)
+              : `+${(netPAndLSum / itemNumber).toFixed(0)}`}
           </li>
-          <li className='green'>{(tradeSum?.winRate * 100).toFixed(0)}%</li>
+          <li className='green'>{winRateSum === null ? '0' : winRateSum}%</li>
           <li></li>
           <li></li>
           <li></li>
@@ -95,14 +93,10 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
         </ul>
         <ul>
           <li className='bold-14'>均口淨損益</li>
-          <li
-            className={
-              String(tradeSum?.netPAndL).includes('-') ? 'red' : 'green'
-            }
-          >
-            {String(tradeSum?.netPAndL).includes('-')
-              ? (tradeSum?.netPAndL / tradeSum?.roundTrip).toFixed(2)
-              : `+${(tradeSum?.netPAndL / tradeSum?.roundTrip).toFixed(2)}`}
+          <li className={String(netPAndLSum).includes('-') ? 'red' : 'green'}>
+            {String(netPAndLSum).includes('-')
+              ? (netPAndLSum / roundTripSum).toFixed(0)
+              : `+${(netPAndLSum / roundTripSum).toFixed(0)}`}
           </li>
           <li></li>
           <li></li>
