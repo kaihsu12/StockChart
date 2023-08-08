@@ -32,5 +32,11 @@ export function formatDateForApi(date) {
     String(date.getMonth() + 1).length === 2 ? '' : '0'
   }${date.getMonth() + 1}-${
     String(date.getDate()).length === 2 ? '' : '0'
-  }${date.getDate()}`;
+  }${date.getDate()} ${
+    String(date.getHours()).length === 2 ? '' : '0'
+  }${date.getHours()}:${
+    String(date.getMinutes()).length === 2 ? '' : '0'
+  }${date.getMinutes()}:${
+    String(date.getSeconds()).length === 2 ? '' : '0'
+  }${date.getSeconds()}`;
 }

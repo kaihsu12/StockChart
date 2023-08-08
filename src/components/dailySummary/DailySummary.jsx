@@ -19,11 +19,19 @@ const DailySummary = ({ dailyTradeSummary }) => {
       <div className='detail regular-14'>
         <span>
           <p>總口數</p>
-          <p>x1</p>
+          <p>x{dailyTradeSummary.roundTrip}</p>
         </span>
         <span>
           <p>合計</p>
-          <p>+6</p>
+          <p
+            className={
+              String(dailyTradeSummary.pAndL).includes('-') ? 'red' : 'green'
+            }
+          >
+            {String(dailyTradeSummary.pAndL).includes('-')
+              ? dailyTradeSummary.pAndL
+              : `+${dailyTradeSummary.pAndL}`}
+          </p>
         </span>
         <span>
           <p>淨損益</p>
@@ -39,23 +47,7 @@ const DailySummary = ({ dailyTradeSummary }) => {
         </span>
         <span>
           <p>盈虧比</p>
-          <p>0 : 6.00</p>
-        </span>
-        <span>
-          <p>總量</p>
-          <p>67,406</p>
-        </span>
-        <span>
-          <p>高低差</p>
-          <p>133</p>
-        </span>
-        <span>
-          <p>5日均量</p>
-          <p>86,765</p>
-        </span>
-        <span>
-          <p>5日平均高低差</p>
-          <p>86,765</p>
+          <p>{Number(dailyTradeSummary?.riskRatio)?.toFixed(2)}</p>
         </span>
       </div>
     </div>
