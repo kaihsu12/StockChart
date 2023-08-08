@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/StockChart/static/css/main.37d589dd.css",
-    "main.js": "/StockChart/static/js/main.89c098fc.js",
+    "main.js": "/StockChart/static/js/main.dc2e75a4.js",
     "static/media/user.jpg": "/StockChart/static/media/user.bdf9501b4e51172c66c4.jpg",
     "static/media/setting.svg": "/StockChart/static/media/setting.789307bdff207274a4891a00c520b270.svg",
     "static/media/setting-white.svg": "/StockChart/static/media/setting-white.1490e26f05fb95dac3c05121bd0ae79e.svg",
@@ -33,10 +33,10 @@
     "static/media/arrow-green.svg": "/StockChart/static/media/arrow-green.b005a424727a844e2bd57394b73ef6f2.svg",
     "static/media/arrow-purple.svg": "/StockChart/static/media/arrow-purple.f1e56f96be3c01c51d2a6472bdfc72c8.svg",
     "main.37d589dd.css.map": "/StockChart/static/css/main.37d589dd.css.map",
-    "main.89c098fc.js.map": "/StockChart/static/js/main.89c098fc.js.map"
+    "main.dc2e75a4.js.map": "/StockChart/static/js/main.dc2e75a4.js.map"
   },
   "entrypoints": [
     "static/css/main.37d589dd.css",
-    "static/js/main.89c098fc.js"
+    "static/js/main.dc2e75a4.js"
   ]
 }
