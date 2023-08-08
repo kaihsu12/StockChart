@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 //api
 import { getRanking } from '../../api/main';
-// img
-import userImg from '../../assets/user.jpg';
 // style
 import './RankingList.scss';
 
@@ -30,7 +28,7 @@ const RankingList = () => {
           return (
             <div key={`top-` + item.user_id} className='userItem'>
               <div className='userWidget'>
-                <img className='userImg' src={userImg} alt='user-img' />
+                <img className='userImg' src={item.avatar} alt='user-img' />
                 <span className='userInfo'>
                   <p className='bold-14'>{`${
                     item.username.slice(0, 1).toUpperCase() +

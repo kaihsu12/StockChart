@@ -87,6 +87,7 @@ const ReplyPage = () => {
                 replyId={reply.id}
                 setReplies={setTweetReplies}
                 setTweet={setSingleTweet}
+                avatar={reply.user_avatar}
               />
             );
           })}

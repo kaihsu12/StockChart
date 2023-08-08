@@ -3,7 +3,6 @@ import { useState } from 'react';
 // components
 import DeleteBox from '../deleteBox/DeleteBox';
 // icons
-import userImg from '../../assets/user.jpg';
 import replyArrow from '../../assets/reply-arrow.svg';
 import optionIcon from '../../assets/options.svg';
 //style
@@ -21,6 +20,7 @@ const SingleReply = ({
   replyId,
   setReplies,
   setTweet,
+  avatar,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -34,7 +34,7 @@ const SingleReply = ({
     >
       <div className='tweetTop'>
         <div className='userWidget'>
-          <img className='userImg' src={userImg} alt='user-img' />
+          <img className='userImg' src={avatar} alt='user-img' />
           <span className='userInfo'>
             <p className='bold-14'>{`${
               name.slice(0, 1).toUpperCase() + name.slice(1)

@@ -2,7 +2,6 @@
 import React from 'react';
 // icons
 import bellIcon from '../../assets/bell-gray.svg';
-import userImg from '../../assets/user.jpg';
 // context
 import { useAuth } from '../../contexts/AuthContext';
 // style
@@ -12,11 +11,13 @@ import { formatDate } from '../../timeSwitcher/timeSwitcher';
 
 const Header = () => {
   const { currentMember } = useAuth();
-  const username = currentMember?.name;
+  const username =
+    currentMember?.name?.slice(0, 1).toUpperCase() +
+    currentMember?.name?.slice(1);
   const userAccount = currentMember?.account;
+  const avatar = currentMember?.avatar;
 
   // to output day of week
-  const date = new Date();
   const daysOfWeek = [
     '星期日',
     '星期一',
@@ -40,7 +41,7 @@ const Header = () => {
           <img src={bellIcon} alt='bell-icon' />
         </span>
         <div className='userWidget'>
-          <img className='userImg' src={userImg} alt='user-img' />
+          <img className='userImg' src={avatar} alt='user-img' />
           <span className='userInfo'>
             <p className='bold-14'>{username}</p>
             <p className='regular-14'>@{userAccount}</p>
