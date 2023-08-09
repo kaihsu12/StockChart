@@ -1,0 +1,94 @@
+.dailyHistoryPage {
+  display: flex;
+
+  .dailyHistoryBody {
+    height: 100vh;
+    flex: 1;
+    .dailyHistoryMain {
+      margin-top: 72px;
+      height: calc(100vh - 72px);
+      overflow-y: scroll;
+      padding: 26px 38px 0 38px;
+      background-color: var(--background-gray);
+
+      .filterBox {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        .btn {
+          width: 100px;
+          height: 42px;
+        }
+
+        .datePicker {
+          display: flex;
+          align-items: center;
+          width: 192px;
+          height: 42px;
+          border: 1px solid var(--border-gray);
+          border-radius: 4px;
+          background-color: white;
+          position: relative;
+
+          img:first-child {
+            padding-left: 14px;
+            margin-top: 2px;
+            cursor: auto;
+          }
+
+          img:last-child {
+            margin-top: 3px;
+            position: absolute;
+            right: 16px;
+          }
+
+          .picker {
+            cursor: pointer;
+          }
+
+          .react-datepicker {
+            color: var(--primary-blue);
+          }
+
+          .react-datepicker__day--selected {
+            background-color: var(--primary-purple);
+          }
+
+          .react-datepicker-wrapper {
+            padding-left: 10px;
+            z-index: 1;
+            width: 100%;
+            .react-datepicker__input-container {
+              display: flex;
+              align-items: center;
+
+              input {
+                padding: 0;
+                font-size: 14px;
+                font-weight: 500;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .dailySection {
+        display: flex;
+        gap: 12px;
+        .dailyDiagram {
+          width: 100%;
+          height: auto;
+          border: 1px solid var(--border-gray);
+          border-radius: 4px;
+          background-color: white;
+        }
+        .listSec {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+    }
+  }
+}
