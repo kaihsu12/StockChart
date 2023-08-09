@@ -19,6 +19,7 @@ export const DailyItem = ({
   content,
   isPublic,
   setTodayTransactions,
+  setSwitcher,
 }) => {
   const time = tradeTime.substr(11, 8);
   const [editModal, setEditModal] = useState(false);
@@ -53,7 +54,7 @@ export const DailyItem = ({
         content={content}
         isShow={editModal}
         setIsShow={setEditModal}
-        setTodayTransactions={setTodayTransactions}
+        setSwitcher={setSwitcher}
       />
       <PublishModal
         tradeId={tradeId}
