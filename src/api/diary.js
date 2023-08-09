@@ -46,7 +46,6 @@ export const deleteTransaction = async (id) => {
 };
 
 export const putTransaction = async ({ tradeId, transaction }) => {
-  console.log(transaction);
   try {
     const res = await axiosInstance.put(
       `${baseUrl}/transactions/${tradeId}`,
