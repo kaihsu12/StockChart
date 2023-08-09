@@ -1,8 +1,7 @@
 {
   "files": {
-    "main.css": "/StockChart/static/css/main.37d589dd.css",
-    "main.js": "/StockChart/static/js/main.dc2e75a4.js",
-    "static/media/user.jpg": "/StockChart/static/media/user.bdf9501b4e51172c66c4.jpg",
+    "main.css": "/StockChart/static/css/main.0574f062.css",
+    "main.js": "/StockChart/static/js/main.86e27d05.js",
     "static/media/setting.svg": "/StockChart/static/media/setting.789307bdff207274a4891a00c520b270.svg",
     "static/media/setting-white.svg": "/StockChart/static/media/setting-white.1490e26f05fb95dac3c05121bd0ae79e.svg",
     "static/media/dashboard.svg": "/StockChart/static/media/dashboard.0aad5ebaeb9a0a1d087605ce102ad299.svg",
@@ -14,6 +13,7 @@
     "static/media/home-white.svg": "/StockChart/static/media/home-white.87d1b08d9699bb607b0b9871d7a0c527.svg",
     "static/media/diary.svg": "/StockChart/static/media/diary.5c088cda9fd83c72e0438b5ad05aec79.svg",
     "static/media/diary-white.svg": "/StockChart/static/media/diary-white.ca247e711794dc268a30bbe8ff645f54.svg",
+    "static/media/detail.svg": "/StockChart/static/media/detail.9221b3982241e9e37c09d737ea434be7.svg",
     "static/media/comment.svg": "/StockChart/static/media/comment.438e7d17ea378a10af5b1b71265d53e6.svg",
     "static/media/history-white.svg": "/StockChart/static/media/history-white.ad2ff93ed56ab2c624858557e3bc2b87.svg",
     "static/media/heart-filled.svg": "/StockChart/static/media/heart-filled.00cc500a208a152bd3ff49fdeb4cb9d1.svg",
@@ -32,11 +32,11 @@
     "static/media/arrow-left.svg": "/StockChart/static/media/arrow-left.63cad4e78c8e43b0d721dd97e957c09e.svg",
     "static/media/arrow-green.svg": "/StockChart/static/media/arrow-green.b005a424727a844e2bd57394b73ef6f2.svg",
     "static/media/arrow-purple.svg": "/StockChart/static/media/arrow-purple.f1e56f96be3c01c51d2a6472bdfc72c8.svg",
-    "main.37d589dd.css.map": "/StockChart/static/css/main.37d589dd.css.map",
-    "main.dc2e75a4.js.map": "/StockChart/static/js/main.dc2e75a4.js.map"
+    "main.0574f062.css.map": "/StockChart/static/css/main.0574f062.css.map",
+    "main.86e27d05.js.map": "/StockChart/static/js/main.86e27d05.js.map"
   },
   "entrypoints": [
-    "static/css/main.37d589dd.css",
-    "static/js/main.dc2e75a4.js"
+    "static/css/main.0574f062.css",
+    "static/js/main.86e27d05.js"
   ]
 }
