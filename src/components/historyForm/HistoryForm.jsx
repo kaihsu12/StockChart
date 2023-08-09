@@ -35,7 +35,7 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
       </div>
       <div className='mainBody regular-14'>
         {dailytrades?.length === 0 && (
-          <ul>
+          <ul className='noData'>
             <li>無交易紀錄</li>
             <li>無資料顯示</li>
           </ul>
@@ -51,7 +51,14 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
 
           return (
             <ul key={`trade-${i}`}>
-              <li>{date === null ? '0000-00-00' : date}</li>
+              <li
+                onClick={() => {
+                  getChosenDate(date);
+                  navigate('/daily-history');
+                }}
+              >
+                {date === null ? '0000-00-00' : date}
+              </li>
               <li className={netpandl?.includes('-') ? 'red' : 'green'}>
                 {netpandl?.includes('-') ? netpandl : `+${netpandl}`}
               </li>
