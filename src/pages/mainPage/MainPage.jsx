@@ -91,6 +91,7 @@ export const MainPage = () => {
                         replies={tweet.replies_count}
                         reSetTweets={setTweets}
                         activeTab={currentTab}
+                        avatar={tweet.transaction_user_avatar}
                       />
                     )
                   );

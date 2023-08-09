@@ -5,7 +5,6 @@ import ReplyModal from '../replyModal/ReplyModal';
 // api
 import { likeTweet, unlikeTweet } from '../../api/tweet';
 // icons
-import userImg from '../../assets/user.jpg';
 import buyIcon from '../../assets/buy.svg';
 import sellIcon from '../../assets/sell.svg';
 import heartHollow from '../../assets/heart-hollow.svg';
@@ -17,20 +16,22 @@ import { formatTime } from '../../timeSwitcher/timeSwitcher';
 
 const SingleTweet = ({ tweet, setTweet, setReplies }) => {
   const [modal, setModal] = useState(false);
-  const date = tweet.transaction_date;
+  const date = tweet?.transaction_date;
   const dealTime = new Date(date);
-  const username = tweet.transaction_user_name;
+  const username =
+    tweet?.transaction_user_name?.slice(0, 1).toUpperCase() +
+    tweet?.transaction_user_name?.slice(1);
 
   const handleLike = async () => {
     try {
-      (await tweet.is_like) ? unlikeTweet(tweet.id) : likeTweet(tweet.id);
+      (await tweet?.is_like) ? unlikeTweet(tweet?.id) : likeTweet(tweet?.id);
       setTweet((tweet) => {
         return {
           ...tweet,
-          like_count: tweet.is_like
-            ? Number(tweet.like_count) - 1
-            : Number(tweet.like_count) + 1,
-          is_like: !tweet.is_like,
+          like_count: tweet?.is_like
+            ? Number(tweet?.like_count) - 1
+            : Number(tweet?.like_count) + 1,
+          is_like: !tweet?.is_like,
         };
       });
     } catch (error) {
@@ -48,17 +49,21 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
         <div className='tweetMain'>
           <div className='tweetTop'>
             <div className='userWidget'>
-              <img className='userImg' src={userImg} alt='user-img' />
+              <img
+                className='userImg'
+                src={tweet?.transaction_user_avatar}
+                alt='user-img'
+              />
               <span className='userInfo'>
                 <p className='bold-14'>{username}</p>
-                <p className='regular-14'>@{tweet.transaction_user_account}</p>
+                <p className='regular-14'>@{tweet?.transaction_user_account}</p>
               </span>
             </div>
-            <span className='regular-14'>{formatTime(tweet.updated_on)}</span>
+            <span className='regular-14'>{formatTime(tweet?.updated_on)}</span>
           </div>
 
           <div className='tweetMsg'>
-            <p className='regular-18'>{tweet.description}</p>
+            <p className='regular-18'>{tweet?.description}</p>
           </div>
 
           <div className='singleTrade'>
@@ -72,11 +77,11 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
               <li>
                 <span>
                   <img
-                    src={tweet.action === 'buy' ? buyIcon : sellIcon}
+                    src={tweet?.action === 'buy' ? buyIcon : sellIcon}
                     alt='trade-Icon'
                   />
                 </span>
-                {tweet.action === 'buy' ? (
+                {tweet?.action === 'buy' ? (
                   <p className='buy'>買</p>
                 ) : (
                   <p className='sell'>賣</p>
@@ -96,9 +101,11 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
                   String(dealTime.getSeconds()).length !== 2 ? '0' : ''
                 }${dealTime.getSeconds()}`}</p>
               </li>
-              <li>x{tweet.quantity}</li>
-              <li className={tweet.action === 'buy' ? 'buyPrice' : 'sellPrice'}>
-                ${tweet.price}
+              <li>x{tweet?.quantity}</li>
+              <li
+                className={tweet?.action === 'buy' ? 'buyPrice' : 'sellPrice'}
+              >
+                ${tweet?.price}
               </li>
             </ul>
           </div>
@@ -107,16 +114,16 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
         <div className='tweetControl'>
           <span className='likes'>
             <img
-              src={tweet.is_like ? heartFilled : heartHollow}
+              src={tweet?.is_like ? heartFilled : heartHollow}
               alt='heart-Icon'
               onClick={handleLike}
             />
-            <p className='medium-14'>{tweet.like_count}</p>
+            <p className='medium-14'>{tweet?.like_count}</p>
           </span>
           <span className='verticalLine'></span>
           <span className='comments'>
             <img src={commentIcon} alt='comment-Icon' onClick={toggleModal} />
-            <p className='medium-14'>{tweet.replies_count}</p>
+            <p className='medium-14'>{tweet?.replies_count}</p>
           </span>
         </div>
       </div>

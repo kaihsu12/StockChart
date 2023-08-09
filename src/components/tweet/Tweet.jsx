@@ -9,7 +9,6 @@ import { useId } from '../../contexts/IdContext';
 //api
 import { likeTweet, unlikeTweet } from '../../api/tweet';
 // icons
-import userImg from '../../assets/user.jpg';
 import buyIcon from '../../assets/buy.svg';
 import sellIcon from '../../assets/sell.svg';
 import heartHollow from '../../assets/heart-hollow.svg';
@@ -34,6 +33,7 @@ const Tweet = ({
   replies,
   reSetTweets,
   activeTab,
+  avatar,
 }) => {
   const [modal, setModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -107,7 +107,7 @@ const Tweet = ({
         <div className='tweetMain'>
           <div className='tweetTop'>
             <div className='userWidget'>
-              <img className='userImg' src={userImg} alt='user-img' />
+              <img className='userImg' src={avatar} alt='user-img' />
               <span className='userInfo'>
                 <p className='bold-14'>{`${
                   name.slice(0, 1).toUpperCase() + name.slice(1)

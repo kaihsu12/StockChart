@@ -1,15 +1,23 @@
+// hooks
+import { useNavigate } from 'react-router-dom';
+// context
+import { useDate } from '../../contexts/DateContext';
 // icons
-import msgIcon from '../../assets/message.svg';
+import detailIcon from '../../assets/detail.svg';
 // style
 import './HistoryForm.scss';
 //others
 import { formatDate } from '../../timeSwitcher/timeSwitcher';
 
 const HistoryForm = ({ dailytrades, tradeSum }) => {
+  const navigate = useNavigate();
+
   const netPAndLSum = tradeSum?.netPAndL === null ? '0' : tradeSum?.netPAndL;
   const itemNumber = dailytrades?.length === 0 ? 1 : dailytrades?.length;
   const roundTripSum = tradeSum?.roundTrip === 0 ? 1 : tradeSum?.roundTrip;
   const winRateSum = (tradeSum?.winRate * 100).toFixed(0);
+
+  const { getChosenDate } = useDate();
 
   return (
     <div className='historyForm'>
@@ -27,7 +35,7 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
       </div>
       <div className='mainBody regular-14'>
         {dailytrades?.length === 0 && (
-          <ul>
+          <ul className='noData'>
             <li>無交易紀錄</li>
             <li>無資料顯示</li>
           </ul>
@@ -39,9 +47,18 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
 
           const netpandl = trade?.netpandl === null ? '0' : trade.netpandl;
 
+          const date = trade?.date.substr(0, 10);
+
           return (
             <ul key={`trade-${i}`}>
-              <li>{trade?.date === null ? '0' : formatDate(trade?.date)}</li>
+              <li
+                onClick={() => {
+                  getChosenDate(date);
+                  navigate('/daily-history');
+                }}
+              >
+                {date === null ? '0000-00-00' : date}
+              </li>
               <li className={netpandl?.includes('-') ? 'red' : 'green'}>
                 {netpandl?.includes('-') ? netpandl : `+${netpandl}`}
               </li>
@@ -52,7 +69,14 @@ const HistoryForm = ({ dailytrades, tradeSum }) => {
               <li>{trade?.wincount === null ? '0' : trade?.wincount}</li>
               <li>{trade?.losscount === null ? '0' : trade?.losscount}</li>
               <li>
-                <img src={msgIcon} alt='message-icon' />
+                <img
+                  src={detailIcon}
+                  alt='detail-icon'
+                  onClick={() => {
+                    getChosenDate(date);
+                    navigate('/daily-history');
+                  }}
+                />
               </li>
             </ul>
           );
