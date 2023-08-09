@@ -1,5 +1,5 @@
 // hooks
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 // components
@@ -11,6 +11,7 @@ import { useAuth } from '../../contexts/AuthContext';
 // icons
 import clockIcon from '../../assets/clock.svg';
 import arrowIcon from '../../assets/arrow-down.svg';
+// api
 import { getHistory } from '../../api/history';
 // style
 import 'react-datepicker/dist/react-datepicker.css';
@@ -18,7 +19,6 @@ import './HistoryPage.scss';
 
 const HistoryPage = () => {
   const navigate = useNavigate();
-
   const { isAuthenticated, currentMember } = useAuth();
 
   // Get the first and last days of the month
