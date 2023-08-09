@@ -11,9 +11,11 @@ import HistoryPage from '../historyPage/HistoryPage';
 import DashboardPage from '../dashboardPage/DashboardPage';
 import SettingPage from '../settingPage/SettingPage';
 import ReplyPage from '../replyPage/ReplyPage';
+import DailyHistoryPage from '../dailyHistoryPage/DailyHistoryPage';
 // context
 import { IdProvider } from '../../contexts/IdContext';
 import { AuthProvider } from '../../contexts/AuthContext';
+import { DateProvider } from '../../contexts/DateContext';
 // style
 import './reset.scss';
 import './base.scss';
@@ -26,17 +28,20 @@ const Home = () => {
       <BrowserRouter basename={basename}>
         <AuthProvider>
           <IdProvider>
-            <Routes>
-              <Route path='*' element={<LoginPage />} />
-              <Route path='/signup' element={<SignupPage />} />
-              <Route path='/admin' element={<AdminLoginPage />} />
-              <Route path='/main' element={<MainPage />} />
-              <Route path='/diary' element={<DiaryPage />} />
-              <Route path='/history' element={<HistoryPage />} />
-              <Route path='/dashboard' element={<DashboardPage />} />
-              <Route path='/reply' element={<ReplyPage />} />
-              <Route path='/setting' element={<SettingPage />} />
-            </Routes>
+            <DateProvider>
+              <Routes>
+                <Route path='*' element={<LoginPage />} />
+                <Route path='/signup' element={<SignupPage />} />
+                <Route path='/admin' element={<AdminLoginPage />} />
+                <Route path='/main' element={<MainPage />} />
+                <Route path='/diary' element={<DiaryPage />} />
+                <Route path='/history' element={<HistoryPage />} />
+                <Route path='/dashboard' element={<DashboardPage />} />
+                <Route path='/daily-history' element={<DailyHistoryPage />} />
+                <Route path='/reply' element={<ReplyPage />} />
+                <Route path='/setting' element={<SettingPage />} />
+              </Routes>
+            </DateProvider>
           </IdProvider>
         </AuthProvider>
       </BrowserRouter>
