@@ -18,7 +18,9 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
   const [modal, setModal] = useState(false);
   const date = tweet?.transaction_date;
   const dealTime = new Date(date);
-  const username = tweet?.transaction_user_name;
+  const username =
+    tweet?.transaction_user_name?.slice(0, 1).toUpperCase() +
+    tweet?.transaction_user_name?.slice(1);
 
   const handleLike = async () => {
     try {
