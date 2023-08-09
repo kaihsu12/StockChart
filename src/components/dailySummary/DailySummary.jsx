@@ -7,7 +7,15 @@ const DailySummary = ({ dailyTradeSummary }) => {
       <div className='mainInfo'>
         <span className='title medium-14'>本日淨損益</span>
         <div className='sum'>
-          <span className='bold-28'>$1,400</span>
+          <span
+            className={`bold-28 ${
+              String(dailyTradeSummary.netPAndL).includes('-') ? 'red' : 'green'
+            }`}
+          >
+            {String(dailyTradeSummary.netPAndL).includes('-')
+              ? `$${dailyTradeSummary.netPAndL * 200}`
+              : `$+${dailyTradeSummary.netPAndL * 200}`}
+          </span>
           <span>
             <p className='medium-12'>
               +{(dailyTradeSummary?.winRate * 100).toFixed(0)}% 勝率
@@ -22,18 +30,6 @@ const DailySummary = ({ dailyTradeSummary }) => {
           <p>x{dailyTradeSummary.roundTrip}</p>
         </span>
         <span>
-          <p>合計</p>
-          <p
-            className={
-              String(dailyTradeSummary.pAndL).includes('-') ? 'red' : 'green'
-            }
-          >
-            {String(dailyTradeSummary.pAndL).includes('-')
-              ? dailyTradeSummary.pAndL
-              : `+${dailyTradeSummary.pAndL}`}
-          </p>
-        </span>
-        <span>
           <p>淨損益</p>
           <p
             className={
@@ -43,6 +39,18 @@ const DailySummary = ({ dailyTradeSummary }) => {
             {String(dailyTradeSummary.netPAndL).includes('-')
               ? dailyTradeSummary.netPAndL
               : `+${dailyTradeSummary.netPAndL}`}
+          </p>
+        </span>
+        <span>
+          <p>合計</p>
+          <p
+            className={
+              String(dailyTradeSummary.pAndL).includes('-') ? 'red' : 'green'
+            }
+          >
+            {String(dailyTradeSummary.pAndL).includes('-')
+              ? dailyTradeSummary.pAndL
+              : `+${dailyTradeSummary.pAndL}`}
           </p>
         </span>
         <span>
