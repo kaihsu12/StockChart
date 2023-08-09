@@ -85,6 +85,29 @@
         background-color: var(--background-gray);
         color: var(--primary-purple);
       }
+      &:hover {
+        background-color: var(--background-gray);
+        li:first-child {
+          background-color: var(--background-gray);
+          border-right: 4px solid var(--primary-purple);
+          color: var(--primary-purple);
+          font-weight: 700;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .noData {
+      &:hover {
+        background-color: #ffff;
+        li:first-child {
+          font-weight: 400;
+          text-decoration: none;
+          border-right: 1px solid var(--border-gray);
+          cursor: auto;
+        }
+      }
     }
 
     .blue {
