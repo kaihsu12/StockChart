@@ -25,14 +25,15 @@ const EditTradeModal = ({
   content,
   isShow,
   setIsShow,
-  setTodayTransactions,
+  setSwitcher,
 }) => {
   const actionType = tradeAction === 'buy' ? '買' : '賣';
+  const timeUTC = `${tradeTime?.substr(0, 10)} ${tradeTime?.substr(11, 8)}`;
   // states
   const [action, setAction] = useState(actionType);
   const [tradeQuantity, setTradeQuantity] = useState(quantity);
   const [tradePrice, setTradePrice] = useState(price);
-  const [transactionDate, setTransactionDate] = useState('');
+  const [transactionDate, setTransactionDate] = useState(new Date(timeUTC));
   const [description, setDescription] = useState(content);
 
   const tradeType = () => {
@@ -50,11 +51,7 @@ const EditTradeModal = ({
     try {
       await deleteTransaction(tradeId);
 
-      setTodayTransactions?.((trades) => {
-        return trades.filter((trade) => {
-          return trade.id !== tradeId;
-        });
-      });
+      setSwitcher((current) => !current);
 
       setIsShow(!isShow);
     } catch (error) {
@@ -67,7 +64,7 @@ const EditTradeModal = ({
     const type = tradeType();
 
     try {
-      const res = await putTransaction({
+      await putTransaction({
         tradeId,
         transaction: {
           action: type,
@@ -78,8 +75,7 @@ const EditTradeModal = ({
         },
       });
 
-      console.log(res);
-
+      setSwitcher((current) => !current);
       // setTodayTransactions?.((trades) => {
       //   return trades.map((trade) => {
       //     if (trade.id === tradeId) {
@@ -93,12 +89,6 @@ const EditTradeModal = ({
       //       };
       //     }
       //     return { ...trade };
-      //   });
-      // });
-
-      // setTodayTransactions?.((trades) => {
-      //   return trades.filter((trade) => {
-      //     return trade.id !== tradeId;
       //   });
       // });
 
