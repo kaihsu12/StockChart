@@ -5,7 +5,12 @@ import clockIcon from '../../assets/clock.svg';
 // style
 import './DailyRecord.scss';
 
-const DailyRecord = ({ todayTransactions, setTodayTransactions, date }) => {
+const DailyRecord = ({
+  todayTransactions,
+  setTodayTransactions,
+  date,
+  setSwitcher,
+}) => {
   console.log(todayTransactions);
   return (
     <>
@@ -31,6 +36,7 @@ const DailyRecord = ({ todayTransactions, setTodayTransactions, date }) => {
               content={item.description}
               isPublic={item.is_public}
               setTodayTransactions={setTodayTransactions}
+              setSwitcher={setSwitcher}
             />
           ))}
         </ul>
