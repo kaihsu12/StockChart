@@ -1,58 +1,68 @@
 .topIncomeContainer {
   display: flex;
-  justify-content: flex-start;
-
+  gap: 16px;
+  width: 100%;
   .toatalIncome {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 22vw;
-    height: 11vh;
-    border: 1px solid rgba(224, 224, 224, 1);
+    align-items: flex-start;
+    padding-left: 38px;
+    border: 1px solid var(--border-gray);
     border-radius: 4px;
-    padding-left: 3.8vw;
     color: var(--secondary-gray);
+    background-color: #ffff;
+    width: 32%;
+    height: 118px;
 
-    .panl {
+    span:last-child {
+      margin-top: 4px;
+    }
+
+    .green {
       color: var(--secondary-green);
+    }
+
+    .red {
+      color: var(--secondary-red);
     }
   }
 
   .averageIncome {
     display: flex;
-    width: calc(100% - 22vw);
-    height: 11vh;
-    padding: 1px;
-    margin-left: 16px;
-    border-radius: 4px;
+    align-items: center;
     border: 1px solid rgba(224, 224, 224, 1);
+    border-radius: 4px;
+    background-color: #ffff;
+    flex: 1;
+    height: 118px;
 
-    .average1,
-    .average2,
-    .average3 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: auto;
+    .verticalLine {
+      width: 1px;
+      height: 66px;
+      background-color: var(--border-gray);
+    }
 
+    .average {
+      padding-left: 38px;
       .medium-14 {
         color: var(--secondary-gray);
       }
     }
 
-    .average1,
-    .average2 {
-      padding-right: 3vw;
-      border-right: 1px solid rgba(224, 224, 224, 1);
+    .average1 {
+      flex: 1;
     }
 
     .average2 {
+      flex: 1;
       .bold-28 {
         color: var(--secondary-green);
       }
     }
 
     .average3 {
+      flex: 1;
       .bold-28 {
         color: var(--secondary-red);
       }

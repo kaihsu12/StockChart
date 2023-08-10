@@ -3,40 +3,124 @@
 // 1vh: 10.2px
 
 .dashBoardContainer {
-  margin: 2.5vh 2.6vw 0 2.6vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   .chartSection {
     display: flex;
-    margin-top: 16px;
+    width: 100%;
+    height: 528px;
+    gap: 16px;
+
     .leftChart {
+      width: 32%;
+      height: 50%;
+      background-color: #fff;
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      position: relative;
+
       .pieChart {
         display: flex;
         flex-direction: column;
-        width: 22vw;
-        border-radius: 0.28vw;
-        border: 1px solid rgba(224, 224, 224, 1);
-        .bold-16 {
-          text-align: center;
-          align-items: center;
-          margin: 1vh;
+        align-items: center;
+        height: 100%;
+
+        .medium-16 {
+          color: var(--secondary-gray);
+          margin-top: 16px;
         }
-        .line {
-          border: 1px solid rgba(224, 224, 224, 1);
-          width: 80%;
-          margin: auto;
+
+        .winrate {
+          font-size: 26px;
+          font-weight: bold;
+          color: var(--secondary-green);
+          margin: auto 0;
+          display: flex;
+          align-items: center;
+
+          &::after {
+            content: '%';
+            font-size: 20px;
+            margin-top: 2px;
+            margin-left: 1px;
+          }
+        }
+
+        .count {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          //position: absolute;
+          //bottom: 16px;
+          margin-bottom: 16px;
+          .winCount {
+            display: flex;
+            align-items: center;
+            color: var(--secondary-green);
+            margin: 0;
+
+            &::before {
+              content: '';
+              width: 5px;
+              height: 5px;
+              background-color: var(--secondary-green);
+              border-radius: 50%;
+              margin-right: 6px;
+            }
+
+            &::after {
+              content: '獲利次數';
+              font-size: 12px;
+              font-weight: 500;
+              margin-left: 4px;
+            }
+          }
+
+          .lossCount {
+            display: flex;
+            align-items: center;
+            color: var(--secondary-red);
+            margin: 0;
+
+            &::before {
+              content: '';
+              width: 5px;
+              height: 5px;
+              background-color: var(--secondary-red);
+              border-radius: 50%;
+              margin-right: 6px;
+            }
+
+            &::after {
+              content: '虧損次數';
+              font-size: 12px;
+              font-weight: 500;
+              margin-left: 4px;
+            }
+          }
+
+          .verticalLine {
+            width: 1px;
+            height: 20px;
+            background-color: var(--border-gray);
+          }
         }
       }
     }
+
     .rightChart {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: calc(100% - 22vw);
-      height: 39.3vw; 
+      flex: 1;
+      height: 100%;
       top: 1.56vw;
       left: 1.82vw;
-      margin-left: 16px;
-      border-radius: 0.28vw;
+      border-radius: 4px;
       border: 1px solid rgba(224, 224, 224, 1);
+      background-color: #ffff;
     }
   }
 }

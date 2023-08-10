@@ -17,7 +17,7 @@ import { formatTime } from '../../timeSwitcher/timeSwitcher';
 const SingleTweet = ({ tweet, setTweet, setReplies }) => {
   const [modal, setModal] = useState(false);
   const date = tweet?.transaction_date;
-  const dealTime = new Date(date);
+  //const dealTime = new Date(date);
   const username =
     tweet?.transaction_user_name?.slice(0, 1).toUpperCase() +
     tweet?.transaction_user_name?.slice(1);
@@ -88,18 +88,8 @@ const SingleTweet = ({ tweet, setTweet, setReplies }) => {
                 )}
               </li>
               <li>
-                <p>{`${dealTime.getFullYear()}/${
-                  String(dealTime.getMonth() + 1).length !== 2 ? '0' : ''
-                }${dealTime.getMonth() + 1}/${
-                  String(dealTime.getDate()).length !== 2 ? '0' : ''
-                }${dealTime.getDate()}`}</p>
-                <p>{`${
-                  String(dealTime.getHours()).length !== 2 ? '0' : ''
-                }${dealTime.getHours()}:${
-                  String(dealTime.getMinutes()).length !== 2 ? '0' : ''
-                }${dealTime.getMinutes()}:${
-                  String(dealTime.getSeconds()).length !== 2 ? '0' : ''
-                }${dealTime.getSeconds()}`}</p>
+                <p>{date?.substr(0, 10)}</p>
+                <p>{date?.substr(11, 8)}</p>
               </li>
               <li>x{tweet?.quantity}</li>
               <li
