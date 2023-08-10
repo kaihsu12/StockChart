@@ -7,6 +7,7 @@ import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
 import DailyRecord from '../../components/dailyRecord/DailyRecord';
 import DailySummary from '../../components/dailySummary/DailySummary';
+import PositiveAndNegativeBarChart from '../../components/dashboard/PositiveAndNegativeBarChart/PositiveAndNegativeBarChart';
 // context
 import { useAuth } from '../../contexts/AuthContext';
 import { useDate } from '../../contexts/DateContext';
@@ -56,12 +57,6 @@ const DailyHistoryPage = () => {
 
       setTodayTransactions(res.transactions);
       setDailyTradeSummary(res.historyData);
-
-      // const temData = res.transactions?.map((item) => ({
-      //   date: item.transaction_date.slice(5, 10),
-      //   pandl: item.pandl ?? 0,
-      // }));
-      // setLineChartData(temData);
     };
     getLineChartData();
   }, [switcher]);
@@ -95,14 +90,13 @@ const DailyHistoryPage = () => {
               </div>
               <button
                 className='btn primary-button bold-16'
-                onClick={handleSearch}
-              >
+                onClick={handleSearch}>
                 查詢
               </button>
             </div>
             <div className='dailySection'>
               <div className='dailyDiagram'>
-                {/* <PositiveAndNegativeBarChart transactions={lineChartData} /> */}
+                <PositiveAndNegativeBarChart transactions={todayTransactions} />
               </div>
               <div className='listSec'>
                 <DailyRecord
