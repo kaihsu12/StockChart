@@ -45,7 +45,7 @@
 
   .titleBody {
     color: var(--secondary-gray);
-    background-color: var(--background-gray);
+    background-color: var(--subBackground);
     border-bottom: 1px solid var(--border-gray);
     ul {
       li {
@@ -82,13 +82,13 @@
         }
       }
       li:first-child {
-        background-color: var(--background-gray);
+        background-color: var(--subBackground);
         color: var(--primary-purple);
       }
       &:hover {
-        background-color: var(--background-gray);
+        background-color: var(--subBackground);
         li:first-child {
-          background-color: var(--background-gray);
+          background-color: var(--subBackground);
           border-right: 4px solid var(--primary-purple);
           color: var(--primary-purple);
           font-weight: 700;
@@ -131,7 +131,7 @@
       }
       li:first-child {
         color: var(--secondary-gray);
-        background-color: var(--background-gray);
+        background-color: var(--subBackground);
       }
     }
 
