@@ -127,6 +127,7 @@ const EditTradeModal = ({
                         onChange={(date) => setTransactionDate(date)}
                         dateFormat='yyyy/MM/dd HH:mm:ss'
                         maxDate={new Date()}
+                        minDate={new Date()}
                         showYearDropdown
                         scrollableYearDropdown
                         showTimeSelect
