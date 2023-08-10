@@ -72,26 +72,26 @@ const DashboardPage = () => {
   }, [navigate, isAuthenticated]);
 
   return (
-    <div className='DashboarContainer'>
-      <div className='navbarSection'>
-        <Navbar />
-      </div>
-      <div className='rightContainer'>
+    <div className='dashboardContainer'>
+      <Navbar />
+      <div className='dashboardBody'>
         <Header />
-        <DashBoard
-          transactions={transactions}
-          winRate={winRate}
-          totalWinPoints={totalWinPoints}
-          totalLossPoints={totalLossPoints}
-          winCount={winCount}
-          lossCount={lossCount}
-          pAndL={pAndL}
-          roundTrip={roundTrip}
-          netPAndL={netPAndL}
-          averageLossPoints={averageLossPoints}
-          averageWinPoints={averageWinPoints}
-          riskRatio={riskRatio}
-        />
+        <div className='dashboardMain'>
+          <DashBoard
+            transactions={transactions}
+            winRate={winRate}
+            totalWinPoints={totalWinPoints}
+            totalLossPoints={totalLossPoints}
+            winCount={winCount}
+            lossCount={lossCount}
+            pAndL={pAndL}
+            roundTrip={roundTrip}
+            netPAndL={netPAndL}
+            averageLossPoints={averageLossPoints}
+            averageWinPoints={averageWinPoints}
+            riskRatio={riskRatio}
+          />
+        </div>
       </div>
     </div>
   );

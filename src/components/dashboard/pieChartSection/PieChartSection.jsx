@@ -4,8 +4,8 @@ import './PieChartSection.scss';
 const COLORS = ['#2BC0A9', '#E7483E'];
 
 export const PieChartSection = ({ totalWinPoints, totalLossPoints }) => {
-  const [chartSize, setChartSize] = useState(''); // 初始餅圖大小
-  const chartRef = useRef(null); // 餅圖的 ref
+  const [chartSize, setChartSize] = useState(320); // 初始餅圖大小
+  const chartRef = useRef(); // 餅圖的 ref
 
   const data = [
     { value: totalWinPoints || 100 },
@@ -16,7 +16,7 @@ export const PieChartSection = ({ totalWinPoints, totalLossPoints }) => {
   useEffect(() => {
     const handleResize = () => {
       const containerWidth = chartRef.current?.clientWidth;
-      setChartSize(containerWidth * 0.7);
+      setChartSize(containerWidth * 0.8);
     };
 
     // 添加 resize 事件監聽
@@ -34,13 +34,14 @@ export const PieChartSection = ({ totalWinPoints, totalLossPoints }) => {
         <PieChart width={chartSize} height={chartSize}>
           <Pie
             data={data}
-            cx={chartSize / 2}
-            cy={chartSize / 2}
+            cx={chartSize / 2.1}
+            cy={chartSize / 2.04}
             innerRadius={chartSize * 0.2}
-            outerRadius={chartSize * 0.3}
+            outerRadius={chartSize * 0.28}
             fill='#8884d8'
-            paddingAngle={5}
-            dataKey='value'>
+            paddingAngle={3}
+            dataKey='value'
+          >
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}

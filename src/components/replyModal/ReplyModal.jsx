@@ -6,7 +6,6 @@ import { postReply } from '../../api/tweet';
 import { useAuth } from '../../contexts/AuthContext';
 import { useId } from '../../contexts/IdContext';
 // icons
-import userImg from '../../assets/user.jpg';
 import closeIcon from '../../assets/close.svg';
 // style
 import './ReplyModal.scss';
@@ -83,14 +82,18 @@ const ReplyModal = ({
           <div className='modal-overlay'></div>
           <div className='modal-container'>
             <div className='userWidget'>
-              <img className='userImg' src={userImg} alt='user-img' />
+              <img
+                className='userImg'
+                src={currentMember?.avatar}
+                alt='user-img'
+              />
               <span className='userInfo'>
                 <p className='bold-14'>{`${
-                  currentMember.name.slice(0, 1).toUpperCase() +
-                  currentMember.name.slice(1)
+                  currentMember?.name.slice(0, 1).toUpperCase() +
+                  currentMember?.name.slice(1)
                 }`}</p>
                 <span className='verticalLine'></span>
-                <p className='regular-14'>@{currentMember.account}</p>
+                <p className='regular-14'>@{currentMember?.account}</p>
               </span>
               <img
                 className='closeImg'

@@ -32,5 +32,31 @@ export function formatDateForApi(date) {
     String(date.getMonth() + 1).length === 2 ? '' : '0'
   }${date.getMonth() + 1}-${
     String(date.getDate()).length === 2 ? '' : '0'
-  }${date.getDate()}`;
+  }${date.getDate()} ${
+    String(date.getHours()).length === 2 ? '' : '0'
+  }${date.getHours()}:${
+    String(date.getMinutes()).length === 2 ? '' : '0'
+  }${date.getMinutes()}:${
+    String(date.getSeconds()).length === 2 ? '' : '0'
+  }${date.getSeconds()}`;
+}
+
+export function formatDateForApiWithoutTime(date) {
+  const time = new Date(date);
+  return `${time.getFullYear()}-${
+    String(time.getMonth() + 1).length !== 2 ? '0' : ''
+  }${time.getMonth() + 1}-${
+    String(time.getDate()).length !== 2 ? '0' : ''
+  }${time.getDate()}`;
+}
+
+export function formatTimeForApi(timestamp) {
+  const time = new Date(timestamp);
+  return `${
+    String(time.getHours()).length === 2 ? '' : '0'
+  }${time.getHours()}:${
+    String(time.getMinutes()).length === 2 ? '' : '0'
+  }${time.getMinutes()}:${
+    String(time.getSeconds()).length === 2 ? '' : '0'
+  }${time.getSeconds()}`;
 }

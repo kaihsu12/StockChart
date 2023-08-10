@@ -48,14 +48,19 @@ export const DashBoard = ({
         <div className='chartSection'>
           <div className='leftChart'>
             <div className='pieChart'>
-              <div className='bold-16'>勝率：{winRate ?? 'winRate'}</div>
-              <div className='line'></div>
+              <div className='medium-16'>整體勝率</div>
+              <div className='winrate'>
+                {winRate ? `${(winRate * 100).toFixed(0)}` : '0'}
+              </div>
               <PieChartSection
                 totalWinPoints={totalWinPoints}
                 totalLossPoints={totalLossPoints}
               />
-              <div>獲利次數：{winCount || 'winCount'}</div>
-              <div>虧損次數：{lossCount || 'lossCount'}</div>
+              <div className='count'>
+                <div className='winCount bold-16'>{winCount || '0'}</div>
+                <div className='verticalLine'></div>
+                <div className='lossCount bold-16'>{lossCount || '0'}</div>
+              </div>
             </div>
           </div>
           <div className='rightChart'>

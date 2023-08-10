@@ -25,14 +25,15 @@ const EditTradeModal = ({
   content,
   isShow,
   setIsShow,
-  setTodayTransactions,
+  setSwitcher,
 }) => {
   const actionType = tradeAction === 'buy' ? '買' : '賣';
+  const timeUTC = `${tradeTime?.substr(0, 10)} ${tradeTime?.substr(11, 8)}`;
   // states
   const [action, setAction] = useState(actionType);
   const [tradeQuantity, setTradeQuantity] = useState(quantity);
   const [tradePrice, setTradePrice] = useState(price);
-  const [transactionDate, setTransactionDate] = useState(new Date(tradeTime));
+  const [transactionDate, setTransactionDate] = useState(new Date(timeUTC));
   const [description, setDescription] = useState(content);
 
   const tradeType = () => {
@@ -50,11 +51,7 @@ const EditTradeModal = ({
     try {
       await deleteTransaction(tradeId);
 
-      setTodayTransactions?.((trades) => {
-        return trades.filter((trade) => {
-          return trade.id !== tradeId;
-        });
-      });
+      setSwitcher((current) => !current);
 
       setIsShow(!isShow);
     } catch (error) {
@@ -62,25 +59,23 @@ const EditTradeModal = ({
     }
   };
 
-  const handlePostTrade = async () => {
+  const handlePutTrade = async () => {
     const tradeDate = formatDateForApi(transactionDate);
     const type = tradeType();
-    const transaction = {
-      action: type,
-      quantity: tradeQuantity,
-      price: tradePrice,
-      transaction_date: tradeDate,
-      description: description,
-    };
 
     try {
-      // const res = await putTransaction({
-      //   id: tradeId,
-      //   transaction,
-      // });
+      await putTransaction({
+        tradeId,
+        transaction: {
+          action: type,
+          quantity: tradeQuantity,
+          price: tradePrice,
+          transaction_date: tradeDate,
+          description: description,
+        },
+      });
 
-      // console.log(res);
-
+      setSwitcher((current) => !current);
       // setTodayTransactions?.((trades) => {
       //   return trades.map((trade) => {
       //     if (trade.id === tradeId) {
@@ -94,12 +89,6 @@ const EditTradeModal = ({
       //       };
       //     }
       //     return { ...trade };
-      //   });
-      // });
-
-      // setTodayTransactions?.((trades) => {
-      //   return trades.filter((trade) => {
-      //     return trade.id !== tradeId;
       //   });
       // });
 
@@ -138,6 +127,7 @@ const EditTradeModal = ({
                         onChange={(date) => setTransactionDate(date)}
                         dateFormat='yyyy/MM/dd HH:mm:ss'
                         maxDate={new Date()}
+                        minDate={new Date()}
                         showYearDropdown
                         scrollableYearDropdown
                         showTimeSelect
@@ -177,7 +167,7 @@ const EditTradeModal = ({
                 </button>
                 <button
                   className='btn primary-button bold-16'
-                  onClick={handlePostTrade}
+                  onClick={handlePutTrade}
                 >
                   修改交易
                 </button>
