@@ -24,7 +24,7 @@ import clockIcon from '../../assets/clock.svg';
 import './DiaryPage.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 // functions
-import { formatDateForApi } from '../../timeSwitcher/timeSwitcher';
+import { formatDate, formatDateForApi } from '../../timeSwitcher/timeSwitcher';
 
 const DiaryPage = () => {
   const [action, setAction] = useState('');
@@ -89,8 +89,8 @@ const DiaryPage = () => {
   };
 
   useEffect(() => {
-    const dateString = new Date().toLocaleDateString(); // 2023/8/2
-    setDate(dateString);
+    const dateString = new Date(); // 2023/8/2
+    setDate(formatDate(dateString));
     const getLineChartData = async () => {
       const res = await getTodaysTransactionsData({
         id: id,
@@ -158,6 +158,7 @@ const DiaryPage = () => {
                 onChange={(date) => setTransactionDate(date)}
                 dateFormat='yyyy/MM/dd HH:mm:ss'
                 maxDate={new Date()}
+                minDate={new Date()}
                 showYearDropdown
                 scrollableYearDropdown
                 showTimeSelect
