@@ -14,10 +14,10 @@ const Header = () => {
   const username =
     currentMember?.name?.slice(0, 1).toUpperCase() +
     currentMember?.name?.slice(1);
+  
   const userAccount = currentMember?.account;
-  const avatar = currentMember?.avatar;
+  const userAvatar = currentMember?.avatar;
 
-  // to output day of week
   const daysOfWeek = [
     '星期日',
     '星期一',
@@ -41,7 +41,7 @@ const Header = () => {
           <img src={bellIcon} alt='bell-icon' />
         </span>
         <div className='userWidget'>
-          <img className='userImg' src={avatar} alt='user-img' />
+          <img className='userImg' src={userAvatar} alt='user-img' />
           <span className='userInfo'>
             <p className='bold-14'>{username}</p>
             <p className='regular-14'>@{userAccount}</p>

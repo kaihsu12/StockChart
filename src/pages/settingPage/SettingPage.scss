@@ -1,6 +1,8 @@
 .settingPage {
   display: flex;
-
+  .navbarSection {
+    display: flex;
+  }
   .settingBody {
     height: 100vh;
     flex: 1;
@@ -9,8 +11,38 @@
       display: flex;
       flex-direction: column;
       margin-top: 72px;
+      padding: 26px 0 0 52px;
       height: calc(100vh - 72px);
       overflow-y: scroll;
+      .photoEdit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .userImg {
+          width: 112px;
+          height: 112px;
+          border-radius: 50%;
+        }
+        > label {
+          margin-top: 10px;
+          border-bottom: 1px dotted;
+          color: var(--primary-purple);
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .settingInput,
+    .secondary-button,
+    .photoEdit {
+      width: 40vw;
+      margin-top: 44px;
+    }
+    .secondary-button {
+      margin-top: 40px;
+      height: 42px;
     }
   }
 }

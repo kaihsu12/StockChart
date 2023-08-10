@@ -98,17 +98,22 @@ const DiaryPage = () => {
       });
       console.log(res); // 觀察資料用
 
-      // const newData = res.transactions?.map((item, index) => ({
-      //   ...item,
-      //   listNumber: index + 1,
-      // }));
       setTodayTransactions(res.transactions);
       setDailyTradeSummary(res.historyData);
 
-      const temData = res.transactions?.map((item) => ({
-        date: item.transaction_date.slice(5, 10),
-        pandl: item.pandl ?? 0,
-      }));
+      const temData = res.transactions
+        ?.map((item) => {
+          if (item.status === 'open') {
+            return null;
+          }
+
+          return {
+            date: item.transaction_date.slice(5, 10),
+            pandl: item.pandl ?? 0,
+          };
+        })
+        .filter(Boolean); // 使用 filter 方法來過濾掉值為 null 的項目
+
       setLineChartData(temData);
     };
     getLineChartData();
@@ -134,6 +139,7 @@ const DiaryPage = () => {
         <Header />
         <div
           className={`collapse ${isCollapsed ? 'collapsed' : ''}`}
+
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <span className='bold-16'>輸入表單</span>
