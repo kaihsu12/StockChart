@@ -18,7 +18,6 @@ const SingleReply = ({
   content,
   userId,
   replyId,
-  setReplies,
   setTweet,
   avatar,
 }) => {
@@ -61,7 +60,6 @@ const SingleReply = ({
         <DeleteBox
           userId={userId}
           replyId={replyId}
-          setReplies={setReplies}
           setVisible={setIsVisible}
           visible={isVisible}
           setTweet={setTweet}
