@@ -1,17 +1,17 @@
+// hooks
+import { useQueryClient } from 'react-query';
 //style
 import './UnpublishBox.scss';
 // api
 import { unpublishTweet } from '../../api/tweet';
 
-const UnpublishBox = ({ setVisible, visible, tweetId, reSetTweets }) => {
+const UnpublishBox = ({ setVisible, visible, tweetId }) => {
+  const queryClient = useQueryClient();
+
   const handleUnpublish = async () => {
     try {
       await unpublishTweet(tweetId);
-      reSetTweets?.((tweets) => {
-        return tweets.filter((tweet) => {
-          return tweet.id !== tweetId;
-        });
-      });
+      queryClient.invalidateQueries('/user-posts');
     } catch (error) {
       console.log('隱藏交易紀錄失敗:', error);
     }
