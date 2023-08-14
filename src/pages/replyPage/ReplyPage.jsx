@@ -1,6 +1,7 @@
 //hooks
 import { useEffect, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
+import { useQuery } from 'react-query';
 // components
 import Navbar from '../../components/navbar/Navbar';
 import RankingList from '../../components/rankingList/RankingList';
@@ -20,11 +21,15 @@ import './ReplyPage.scss';
 
 const ReplyPage = () => {
   const [singleTweet, setSingleTweet] = useState({});
-  const [tweetReplies, setTweetReplies] = useState([]);
   const { currentId } = useId();
   const navigate = useNavigate();
 
   const { isAuthenticated } = useAuth();
+
+  // useQuery to fetch api
+  const { data } = useQuery('/replies', () => {
+    return getReplies(currentId);
+  });
 
   useEffect(() => {
     const getSingleTweetAsync = async () => {
@@ -37,17 +42,7 @@ const ReplyPage = () => {
       }
     };
 
-    const getTweetReplies = async () => {
-      try {
-        const replies = await getReplies(currentId);
-        setTweetReplies(replies);
-        console.log(replies);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getSingleTweetAsync();
-    getTweetReplies();
   }, []);
 
   useEffect(() => {
@@ -69,12 +64,8 @@ const ReplyPage = () => {
               </span>
             </NavLink>
           </div>
-          <SingleTweet
-            tweet={singleTweet}
-            setTweet={setSingleTweet}
-            setReplies={setTweetReplies}
-          />
-          {tweetReplies?.map((reply) => {
+          <SingleTweet tweet={singleTweet} setTweet={setSingleTweet} />
+          {data?.map((reply) => {
             return (
               <SingleReply
                 key={reply.id}
@@ -85,7 +76,6 @@ const ReplyPage = () => {
                 content={reply.content}
                 userId={reply.user_id}
                 replyId={reply.id}
-                setReplies={setTweetReplies}
                 setTweet={setSingleTweet}
                 avatar={reply.user_avatar}
               />
