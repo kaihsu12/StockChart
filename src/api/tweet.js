@@ -1,9 +1,12 @@
 import axiosInstance, { baseUrl } from './axiosInstance';
 
 // 所有公開交易紀錄
-export const getTweets = async () => {
+export const getTweets = async (pageParam = 1) => {
   try {
-    const { data } = await axiosInstance.get(`${baseUrl}/transactions/public`);
+    const { data } = await axiosInstance.get(
+      `${baseUrl}/transactions/public?page=${pageParam}`
+    );
+    console.log(data.transactions);
     return data.transactions;
   } catch (error) {
     console.error('[Get Tweets failed]: ', error);
@@ -77,6 +80,8 @@ export const postReply = async ({ id, content }) => {
         content,
       }
     );
+
+    console.log(data.reply);
     return data.reply;
   } catch (error) {
     console.error('[Post Reply failed]: ', error);
