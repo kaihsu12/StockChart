@@ -1,6 +1,7 @@
 // react
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 // pages
 import LoginPage from '../loginPage/LoginPage';
 import SignupPage from '../signupPage/SignupPage';
@@ -21,30 +22,33 @@ import './reset.scss';
 import './base.scss';
 
 const basename = process.env.PUBLIC_URL;
+const queryClient = new QueryClient();
 
 const Home = () => {
   return (
     <div>
-      <BrowserRouter basename={basename}>
-        <AuthProvider>
-          <IdProvider>
-            <DateProvider>
-              <Routes>
-                <Route path='*' element={<LoginPage />} />
-                <Route path='/signup' element={<SignupPage />} />
-                <Route path='/admin' element={<AdminLoginPage />} />
-                <Route path='/main' element={<MainPage />} />
-                <Route path='/diary' element={<DiaryPage />} />
-                <Route path='/history' element={<HistoryPage />} />
-                <Route path='/dashboard' element={<DashboardPage />} />
-                <Route path='/daily-history' element={<DailyHistoryPage />} />
-                <Route path='/reply' element={<ReplyPage />} />
-                <Route path='/setting' element={<SettingPage />} />
-              </Routes>
-            </DateProvider>
-          </IdProvider>
-        </AuthProvider>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter basename={basename}>
+          <AuthProvider>
+            <IdProvider>
+              <DateProvider>
+                <Routes>
+                  <Route path='*' element={<LoginPage />} />
+                  <Route path='/signup' element={<SignupPage />} />
+                  <Route path='/admin' element={<AdminLoginPage />} />
+                  <Route path='/main' element={<MainPage />} />
+                  <Route path='/diary' element={<DiaryPage />} />
+                  <Route path='/history' element={<HistoryPage />} />
+                  <Route path='/dashboard' element={<DashboardPage />} />
+                  <Route path='/daily-history' element={<DailyHistoryPage />} />
+                  <Route path='/reply' element={<ReplyPage />} />
+                  <Route path='/setting' element={<SettingPage />} />
+                </Routes>
+              </DateProvider>
+            </IdProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
     </div>
   );
 };

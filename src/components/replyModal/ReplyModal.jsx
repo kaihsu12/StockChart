@@ -1,5 +1,6 @@
 // hooks
 import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 //api
 import { postReply } from '../../api/tweet';
 //context
@@ -9,15 +10,10 @@ import { useId } from '../../contexts/IdContext';
 import closeIcon from '../../assets/close.svg';
 // style
 import './ReplyModal.scss';
-const ReplyModal = ({
-  isActivated,
-  toggle,
-  setTweet,
-  setReplies,
-  reSetTweets,
-}) => {
+const ReplyModal = ({ isActivated, toggle, setTweet }) => {
   const [replyMsg, setReplyMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [res, setRes] = useState('');
   const { currentMember } = useAuth();
   const { currentId } = useId();
 
@@ -26,6 +22,21 @@ const ReplyModal = ({
     toggle();
   };
 
+  // useMutation - start //
+  const queryClient = useQueryClient();
+  const PostMutation = useMutation({
+    mutationFn: async (reply) => {
+      return await postReply(reply);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries('/posts');
+      queryClient.invalidateQueries('/replies');
+      setRes(data);
+      console.log(data);
+    },
+  });
+  // useMutation - end //
+
   const handleReply = async () => {
     if (replyMsg.length === 0) {
       setErrorMsg('請輸入內容');
@@ -33,9 +44,10 @@ const ReplyModal = ({
     }
 
     try {
-      const res = await postReply({ id: currentId, content: replyMsg });
+      // const res = await postReply({ id: currentId, content: replyMsg });
 
-      console.log(res);
+      // console.log(res);
+      PostMutation.mutate({ id: currentId, content: replyMsg });
 
       setTweet?.((tweet) => {
         return {
@@ -44,28 +56,28 @@ const ReplyModal = ({
         };
       });
 
-      setReplies?.((replies) => {
-        return [
-          {
-            ...res,
-            user_name: currentMember.name,
-            user_account: currentMember.account,
-          },
-          ...replies,
-        ];
-      });
+      // setReplies?.((replies) => {
+      //   return [
+      //     {
+      //       ...res,
+      //       user_name: currentMember?.name,
+      //       user_account: currentMember?.account,
+      //     },
+      //     ...replies,
+      //   ];
+      // });
 
-      reSetTweets?.((prev) => {
-        return prev.map((tweet) => {
-          if (tweet.id === currentId) {
-            return {
-              ...tweet,
-              replies_count: Number(tweet.replies_count) + 1,
-            };
-          }
-          return { ...tweet };
-        });
-      });
+      // reSetTweets?.((prev) => {
+      //   return prev.map((tweet) => {
+      //     if (tweet.id === currentId) {
+      //       return {
+      //         ...tweet,
+      //         replies_count: Number(tweet.replies_count) + 1,
+      //       };
+      //     }
+      //     return { ...tweet };
+      //   });
+      // });
 
       setReplyMsg('');
       setErrorMsg('');

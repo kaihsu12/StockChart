@@ -1,3 +1,5 @@
+// hooks
+import { useQueryClient } from 'react-query';
 //style
 import './DeleteBox.scss';
 // context
@@ -5,26 +7,16 @@ import { useAuth } from '../../contexts/AuthContext';
 // api
 import { deleteReply } from '../../api/tweet';
 
-const DeleteBox = ({
-  userId,
-  replyId,
-  setReplies,
-  setVisible,
-  visible,
-  setTweet,
-}) => {
+const DeleteBox = ({ userId, replyId, setVisible, visible, setTweet }) => {
   const { currentMember } = useAuth();
+  const queryClient = useQueryClient();
 
   const handleDelete = async () => {
     try {
       if (currentMember.id === userId) {
         await deleteReply(replyId);
 
-        setReplies?.((replies) => {
-          return replies.filter((reply) => {
-            return reply.id !== replyId;
-          });
-        });
+        queryClient.invalidateQueries('/replies');
 
         setTweet?.((tweet) => {
           return {
