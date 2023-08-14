@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
           email: payload.email,
           avatar: payload.avatar,
           role: payload.role,
+          introduction: payload.introduction,
         },
         register: async (data) => {
           const { success } = await register({
@@ -86,8 +87,7 @@ export const AuthProvider = ({ children }) => {
           setPayload(null);
           setIsAuthenticated(false);
         },
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );

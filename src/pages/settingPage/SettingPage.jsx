@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
 import PrimaryInput from '../../components/primaryInput/PrimaryInput';
+// package
+import Swal from 'sweetalert2';
 // context
 import { useAuth } from '../../contexts/AuthContext';
 // api
@@ -14,16 +16,16 @@ import './SettingPage.scss';
 
 const SettingPage = () => {
   // currentMemberData
-  const { isAuthenticated, currentMember } = useAuth();
+  const { isAuthenticated, currentMember, logout } = useAuth();
   const currentAvatar = currentMember?.avatar;
   const currentId = currentMember?.id;
   const currentAccount = currentMember?.account;
   const currentUsername = currentMember?.name;
-  const currentEmail = currentMember?.email;
+  const currentIntroduction = currentMember?.introduction;
   // useState
   const [account, setAccount] = useState('');
   const [username, setUserName] = useState('');
-  const [email, setEmail] = useState('');
+  const [introduction, setIntroduction] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [currentImage, setCurrentImage] = useState(currentAvatar);
@@ -43,7 +45,7 @@ const SettingPage = () => {
       id: currentId,
       account: account,
       username: username,
-      email: email,
+      introduction: introduction,
       password: password,
       newPassword: checkPassword,
       avatar: selectedImage,
@@ -55,6 +57,16 @@ const SettingPage = () => {
           formData,
           { headers: { 'Content-type': 'multipart/form-data' } }
         );
+        if (res.status === 200) {
+          Swal.fire({
+            position: 'top',
+            title: '修改成功!',
+            text:'請重新登入',
+            icon: 'success',
+            showConfirmButton: true,
+          });
+          logout();
+        }
         return res;
       } catch (error) {
         console.error(error);
@@ -104,14 +116,16 @@ const SettingPage = () => {
               onChange={(nameInputValue) => setUserName(nameInputValue)}
             />
             <PrimaryInput
-              label='Email'
-              placeholder={currentEmail}
-              value={email}
-              onChange={(emailInputValue) => setEmail(emailInputValue)}
+              label='Introduction'
+              placeholder={currentIntroduction}
+              value={introduction}
+              onChange={(introductionInputValue) =>
+                setIntroduction(introductionInputValue)
+              }
             />
             <PrimaryInput
               type='password'
-              label='密碼'
+              label='舊密碼'
               placeholder={'請輸入密碼'}
               value={password}
               onChange={(passwordInputValue) => setPassword(passwordInputValue)}
