@@ -36,6 +36,7 @@ const DailyHistoryPage = () => {
   const [historyDate, setHistoryDate] = useState(new Date(ChosenDate)); // 請API日期
   const [calendar, setCalendar] = useState(new Date(ChosenDate)); //日記套件日期
   const [todayTransactions, setTodayTransactions] = useState('');
+  const [lineChartData, setLineChartData] = useState([]);
   const [dailyTradeSummary, setDailyTradeSummary] = useState('');
   const [switcher, setSwitcher] = useState(false); // 渲染重整資料
   const date = todayTransactions?.[0]?.transaction_date?.substr(0, 10);
@@ -57,6 +58,20 @@ const DailyHistoryPage = () => {
 
       setTodayTransactions(res.transactions);
       setDailyTradeSummary(res.historyData);
+      
+      const temData = res.transactions
+        ?.map((item) => {
+          if (item.status === 'open') {
+            return null;
+          }
+          return {
+            date: item.transaction_date.slice(5, 10),
+            pandl: item.pandl ?? 0,
+          };
+        })
+        .filter(Boolean); // 使用 filter 方法來過濾掉值為 null 的項目
+
+      setLineChartData(temData);
     };
     getLineChartData();
   }, [switcher]);
@@ -96,7 +111,7 @@ const DailyHistoryPage = () => {
             </div>
             <div className='dailySection'>
               <div className='dailyDiagram'>
-                <PositiveAndNegativeBarChart transactions={todayTransactions} />
+                <PositiveAndNegativeBarChart transactions={lineChartData} />
               </div>
               <div className='listSec'>
                 <DailyRecord
