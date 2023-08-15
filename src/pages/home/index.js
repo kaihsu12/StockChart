@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 // pages
+import HomePage from '../homepage/HomePage';
 import LoginPage from '../loginPage/LoginPage';
 import SignupPage from '../signupPage/SignupPage';
 import AdminLoginPage from '../adminLoginPage/AdminLoginPage';
@@ -33,7 +34,8 @@ const Home = () => {
             <IdProvider>
               <DateProvider>
                 <Routes>
-                  <Route path='*' element={<LoginPage />} />
+                  <Route path='*' element={<HomePage />} />
+                  <Route path='/login' element={<LoginPage />} />
                   <Route path='/signup' element={<SignupPage />} />
                   <Route path='/admin' element={<AdminLoginPage />} />
                   <Route path='/main' element={<MainPage />} />
