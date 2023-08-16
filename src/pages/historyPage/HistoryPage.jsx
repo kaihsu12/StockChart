@@ -61,8 +61,8 @@ const HistoryPage = () => {
   const defaultEnddate = `${endDate.getFullYear()}-${
     String(endDate.getMonth() + 1).length === 2 ? '' : '0'
   }${endDate.getMonth() + 1}-${
-    String(endDate.getDate()).length === 2 ? '' : '0'
-  }${endDate.getDate()}`;
+    String(endDate.getDate() + 1).length === 2 ? '' : '0'
+  }${endDate.getDate() + 1}`;
 
   const handleSearchHistory = async () => {
     try {
