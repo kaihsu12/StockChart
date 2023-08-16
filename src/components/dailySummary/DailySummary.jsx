@@ -5,7 +5,7 @@ const DailySummary = ({ dailyTradeSummary }) => {
   return (
     <div className='dailySummary'>
       <div className='mainInfo'>
-        <span className='title medium-14'>本日淨損益</span>
+        <span className='title medium-14'>淨損益(台幣)</span>
         <div className='sum'>
           <span
             className={`bold-28 ${

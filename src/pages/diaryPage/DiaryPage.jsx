@@ -24,20 +24,24 @@ import clockIcon from '../../assets/clock.svg';
 import './DiaryPage.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 // functions
-import { formatDate, formatDateForApi } from '../../timeSwitcher/timeSwitcher';
+import {
+  formatDate,
+  formatDateForApi,
+  formatDateForApiWithoutTime,
+} from '../../timeSwitcher/timeSwitcher';
 
 const DiaryPage = () => {
   const [action, setAction] = useState('');
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
-  const [transactionDate, setTransactionDate] = useState(new Date());
-  const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [todayTransactions, setTodayTransactions] = useState('');
   const [lineChartData, setLineChartData] = useState([]);
   const [switcher, setSwitcher] = useState(false); // 用於判斷是否有資料送出
   const [dailyTradeSummary, setDailyTradeSummary] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [trandeInputDate, setTrandeInputDate] = useState(new Date()); // 輸入表單選擇日期
+  const [historyDate, setHistoryDate] = useState(new Date()); // 交易紀錄選擇日期和API送出日期
 
   const navigate = useNavigate();
 
@@ -55,7 +59,8 @@ const DiaryPage = () => {
   };
 
   const handleSubmit = async () => {
-    const tradeDate = formatDateForApi(transactionDate);
+    const tradeDate = formatDate(trandeInputDate);
+    const tradeDateApi = formatDateForApi(trandeInputDate);
     const type = tradeType();
 
     try {
@@ -63,7 +68,7 @@ const DiaryPage = () => {
         action: type,
         quantity,
         price,
-        transaction_date: tradeDate,
+        transaction_date: tradeDateApi,
         description,
       });
       if (res.status === 200) {
@@ -73,7 +78,7 @@ const DiaryPage = () => {
           icon: 'success',
           showConfirmButton: true,
         });
-        setSwitcher((current) => !current);
+        setHistoryDate(new Date(tradeDate));
       } else {
         Swal.fire({
           position: 'top',
@@ -89,12 +94,12 @@ const DiaryPage = () => {
   };
 
   useEffect(() => {
-    const dateString = new Date(); // 2023/8/2
-    setDate(formatDate(dateString));
+    const dateApi = formatDateForApiWithoutTime(historyDate);
+    console.log(dateApi);
     const getLineChartData = async () => {
       const res = await getTodaysTransactionsData({
         id: id,
-        date: date,
+        date: dateApi,
       });
       console.log(res); // 觀察資料用
 
@@ -117,7 +122,7 @@ const DiaryPage = () => {
       setLineChartData(temData);
     };
     getLineChartData();
-  }, [switcher]);
+  }, [switcher, historyDate]);
 
   // 觀察資料用
   useEffect(() => {
@@ -157,11 +162,10 @@ const DiaryPage = () => {
               <img src={clockIcon} alt='clock-icon' />
               <DatePicker
                 className='picker'
-                selected={transactionDate}
-                onChange={(date) => setTransactionDate(date)}
+                selected={trandeInputDate}
+                onChange={(date) => setTrandeInputDate(date)}
                 dateFormat='yyyy/MM/dd HH:mm:ss'
                 maxDate={new Date()}
-                minDate={new Date()}
                 showYearDropdown
                 scrollableYearDropdown
                 showTimeSelect
@@ -209,7 +213,8 @@ const DiaryPage = () => {
             <DailyRecord
               todayTransactions={todayTransactions}
               setTodayTransactions={setTodayTransactions}
-              date={date}
+              historyDate={historyDate}
+              setHistoryDate={setHistoryDate}
               setSwitcher={setSwitcher}
             />
             <DailySummary dailyTradeSummary={dailyTradeSummary} />

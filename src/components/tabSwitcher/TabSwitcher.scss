@@ -10,6 +10,10 @@
     p {
       color: var(--secondary-gray);
       cursor: pointer;
+
+      &:hover {
+        color: var(--primary-purple);
+      }
     }
   }
 

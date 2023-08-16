@@ -1,7 +1,6 @@
 // hooks
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
 // components
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
@@ -13,17 +12,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useDate } from '../../contexts/DateContext';
 // api
 import { getTodaysTransactionsData } from '../../api/diary';
-// icons
-import clockIcon from '../../assets/clock.svg';
-import arrowIcon from '../../assets/arrow-down.svg';
 // style
 import './DailyHistoryPage.scss';
-import 'react-datepicker/dist/react-datepicker.css';
 // functions
-import {
-  formatDate,
-  formatDateForApiWithoutTime,
-} from '../../timeSwitcher/timeSwitcher';
+import { formatDateForApiWithoutTime } from '../../timeSwitcher/timeSwitcher';
 
 const DailyHistoryPage = () => {
   const navigate = useNavigate();
@@ -32,19 +24,17 @@ const DailyHistoryPage = () => {
   const { ChosenDate } = useDate();
   const id = currentMember?.id;
 
-  // stste
-  const [historyDate, setHistoryDate] = useState(new Date(ChosenDate)); // 請API日期
-  const [calendar, setCalendar] = useState(new Date(ChosenDate)); //日記套件日期
+  // states
+  const [historyDate, setHistoryDate] = useState(new Date(ChosenDate)); // 交易紀錄選擇日期和API送出日
   const [todayTransactions, setTodayTransactions] = useState('');
   const [lineChartData, setLineChartData] = useState([]);
   const [dailyTradeSummary, setDailyTradeSummary] = useState('');
   const [switcher, setSwitcher] = useState(false); // 渲染重整資料
-  const date = todayTransactions?.[0]?.transaction_date?.substr(0, 10);
 
-  const handleSearch = () => {
-    setHistoryDate(calendar);
-    setSwitcher((current) => !current);
-  };
+  // const handleSearch = () => {
+  //   setHistoryDate(calendar);
+  //   setSwitcher((current) => !current);
+  // };
 
   useEffect(() => {
     const tradeDate = formatDateForApiWithoutTime(historyDate);
@@ -74,7 +64,7 @@ const DailyHistoryPage = () => {
       setLineChartData(temData);
     };
     getLineChartData();
-  }, [switcher]);
+  }, [switcher, historyDate]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -89,26 +79,6 @@ const DailyHistoryPage = () => {
         <div className='dailyHistoryBody'>
           <Header />
           <div className='dailyHistoryMain'>
-            <div className='filterBox'>
-              <div className='datePicker'>
-                <img src={clockIcon} alt='clock-icon' />
-                <DatePicker
-                  className='picker'
-                  selected={calendar}
-                  onChange={(date) => setCalendar(date)}
-                  dateFormat='yyyy/MM/dd'
-                  maxDate={new Date()}
-                  showYearDropdown
-                  scrollableYearDropdown
-                />
-                <img src={arrowIcon} alt='arrow-icon' />
-              </div>
-              <button
-                className='btn primary-button bold-16'
-                onClick={handleSearch}>
-                查詢
-              </button>
-            </div>
             <div className='dailySection'>
               <div className='dailyDiagram'>
                 <PositiveAndNegativeBarChart transactions={lineChartData} />
@@ -117,8 +87,9 @@ const DailyHistoryPage = () => {
                 <DailyRecord
                   todayTransactions={todayTransactions}
                   setTodayTransactions={setTodayTransactions}
-                  date={formatDate(date)}
                   setSwitcher={setSwitcher}
+                  historyDate={historyDate}
+                  setHistoryDate={setHistoryDate}
                 />
                 <DailySummary dailyTradeSummary={dailyTradeSummary} />
               </div>
