@@ -108,7 +108,7 @@ const DiaryPage = () => {
 
       const temData = res.transactions
         ?.map((item) => {
-          if (item.status === 'open') {
+          if (item.status === 'open' || item.category === 'closing_position') {
             return null;
           }
 
