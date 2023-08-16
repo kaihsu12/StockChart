@@ -19,13 +19,11 @@ const SettingPage = () => {
   const { isAuthenticated, currentMember, logout } = useAuth();
   const currentAvatar = currentMember?.avatar;
   const currentId = currentMember?.id;
-  const currentAccount = currentMember?.account;
   const currentUsername = currentMember?.name;
   const currentIntroduction = currentMember?.introduction;
   // useState
-  const [account, setAccount] = useState('');
-  const [username, setUserName] = useState('');
-  const [introduction, setIntroduction] = useState('');
+  const [username, setUserName] = useState(currentUsername);
+  const [introduction, setIntroduction] = useState(currentIntroduction);
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [currentImage, setCurrentImage] = useState(currentAvatar);
@@ -43,7 +41,6 @@ const SettingPage = () => {
   const handleImageSubmit = async () => {
     const formData = {
       id: currentId,
-      account: account,
       username: username,
       introduction: introduction,
       password: password,
@@ -103,12 +100,6 @@ const SettingPage = () => {
             />
           </div>
           <div className='settingInput'>
-            <PrimaryInput
-              label='帳號'
-              placeholder={currentAccount}
-              value={account}
-              onChange={(accountInputValue) => setAccount(accountInputValue)}
-            />
             <PrimaryInput
               label='名稱'
               placeholder={currentUsername}
