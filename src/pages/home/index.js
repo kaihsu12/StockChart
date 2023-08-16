@@ -2,7 +2,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-//import { ReactQueryDevtools } from 'react-query/devtools';
 // pages
 import LoginPage from '../loginPage/LoginPage';
 import SignupPage from '../signupPage/SignupPage';
@@ -45,7 +44,6 @@ const Home = () => {
                   <Route path='/reply' element={<ReplyPage />} />
                   <Route path='/setting' element={<SettingPage />} />
                 </Routes>
-                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
               </DateProvider>
             </IdProvider>
           </AuthProvider>
