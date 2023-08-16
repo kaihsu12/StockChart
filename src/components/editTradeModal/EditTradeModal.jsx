@@ -14,7 +14,7 @@ import arrowIcon from '../../assets/arrow-down.svg';
 import './EditTradeModal.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 // functions
-import { formatDateForApi } from '../../timeSwitcher/timeSwitcher';
+import { formatDateForApi, formatDate } from '../../timeSwitcher/timeSwitcher';
 
 const EditTradeModal = ({
   tradeId,
@@ -26,6 +26,7 @@ const EditTradeModal = ({
   isShow,
   setIsShow,
   setSwitcher,
+  setHistoryDate,
 }) => {
   const actionType = tradeAction === 'buy' ? '買' : '賣';
   const timeUTC = `${tradeTime?.substr(0, 10)} ${tradeTime?.substr(11, 8)}`;
@@ -60,7 +61,8 @@ const EditTradeModal = ({
   };
 
   const handlePutTrade = async () => {
-    const tradeDate = formatDateForApi(transactionDate);
+    const tradeDate = formatDate(transactionDate);
+    const tradeDateApi = formatDateForApi(transactionDate);
     const type = tradeType();
 
     try {
@@ -70,27 +72,12 @@ const EditTradeModal = ({
           action: type,
           quantity: tradeQuantity,
           price: tradePrice,
-          transaction_date: tradeDate,
+          transaction_date: tradeDateApi,
           description: description,
         },
       });
 
-      setSwitcher((current) => !current);
-      // setTodayTransactions?.((trades) => {
-      //   return trades.map((trade) => {
-      //     if (trade.id === tradeId) {
-      //       return {
-      //         ...trade,
-      //         action: type,
-      //         quantity: tradeQuantity,
-      //         price: tradePrice,
-      //         transaction_date: tradeDate,
-      //         description: description,
-      //       };
-      //     }
-      //     return { ...trade };
-      //   });
-      // });
+      setHistoryDate(new Date(tradeDate));
 
       setIsShow(!isShow);
     } catch (error) {
@@ -127,7 +114,6 @@ const EditTradeModal = ({
                         onChange={(date) => setTransactionDate(date)}
                         dateFormat='yyyy/MM/dd HH:mm:ss'
                         maxDate={new Date()}
-                        minDate={new Date()}
                         showYearDropdown
                         scrollableYearDropdown
                         showTimeSelect

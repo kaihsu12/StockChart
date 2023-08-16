@@ -122,9 +122,15 @@ const Tweet = React.forwardRef(
                     <p className='regular-14'>@{account}</p>
                   </span>
                 </div>
-                <span className='date regular-14'>{tweetTime}</span>
+                <div
+                  className={`${
+                    activeTab !== 'user' ? 'date' : 'gap'
+                  } regular-14`}
+                >
+                  {tweetTime}
+                </div>
                 {activeTab === 'user' && (
-                  <span
+                  <div
                     className='option'
                     onClick={() => setIsVisible(!isVisible)}
                   >
@@ -133,10 +139,9 @@ const Tweet = React.forwardRef(
                       src={optionIcon}
                       alt='option-icon'
                     />
-                  </span>
+                  </div>
                 )}
               </div>
-
               <div className='tweetMsg'>
                 <p className='regular-16'>{content}</p>
               </div>
@@ -237,9 +242,15 @@ const Tweet = React.forwardRef(
                     <p className='regular-14'>@{account}</p>
                   </span>
                 </div>
-                <span className='date regular-14'>{tweetTime}</span>
+                <div
+                  className={`${
+                    activeTab !== 'user' ? 'date' : 'gap'
+                  } regular-14`}
+                >
+                  {tweetTime}
+                </div>
                 {activeTab === 'user' && (
-                  <span
+                  <div
                     className='option'
                     onClick={() => setIsVisible(!isVisible)}
                   >
@@ -248,10 +259,9 @@ const Tweet = React.forwardRef(
                       src={optionIcon}
                       alt='option-icon'
                     />
-                  </span>
+                  </div>
                 )}
               </div>
-
               <div className='tweetMsg'>
                 <p className='regular-16'>{content}</p>
               </div>

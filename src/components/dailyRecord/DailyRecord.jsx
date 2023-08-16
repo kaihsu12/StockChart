@@ -1,27 +1,40 @@
+// hooks
+import DatePicker from 'react-datepicker';
 // component
 import DailyItem from './dailyItem/DailyItem';
 // icon
 import clockIcon from '../../assets/clock.svg';
+import arrowIcon from '../../assets/arrow-down.svg';
 // style
 import './DailyRecord.scss';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const DailyRecord = ({
   todayTransactions,
   setTodayTransactions,
-  date,
   setSwitcher,
+  historyDate,
+  setHistoryDate,
 }) => {
   console.log(todayTransactions);
   return (
     <>
       <div className='dailyRecord'>
         <div className='titleSec'>
-          <span className='medium-14'>本日交易紀錄</span>
-          <span>
+          <div className='medium-14'>日期交易紀錄</div>
+          <div className='datePicker'>
             <img src={clockIcon} alt='clock-icon' />
-            <p className='medium-12'>日期</p>
-            <p className='medium-12'>{date}</p>
-          </span>
+            <DatePicker
+              className='picker'
+              selected={historyDate}
+              onChange={(date) => setHistoryDate(date)}
+              dateFormat='yyyy/MM/dd'
+              maxDate={new Date()}
+              showYearDropdown
+              scrollableYearDropdown
+            />
+            <img src={arrowIcon} alt='arrow-icon' />
+          </div>
         </div>
         <ul className='tradeList'>
           {todayTransactions?.map?.((item, i) => (
@@ -37,6 +50,7 @@ const DailyRecord = ({
               isPublic={item.is_public}
               setTodayTransactions={setTodayTransactions}
               setSwitcher={setSwitcher}
+              setHistoryDate={setHistoryDate}
             />
           ))}
         </ul>

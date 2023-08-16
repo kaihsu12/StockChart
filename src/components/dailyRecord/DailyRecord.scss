@@ -10,21 +10,71 @@
     border-bottom: 1px solid var(--border-gray);
     padding: 16px 22px;
 
-    span:last-child {
+    .datePicker {
       display: flex;
       align-items: center;
+      width: 117px;
+      position: relative;
       margin-left: auto;
       margin-right: 0;
-      img {
-        margin-top: 1.5px;
-        width: 12px;
-        height: 12px;
+
+      img:first-child {
+        margin-top: 2px;
+        cursor: auto;
       }
 
-      p:nth-child(2) {
-        padding: 0 6px 0 4px;
+      img:last-child {
+        margin-top: 3px;
+        position: absolute;
+        right: 0;
+      }
+
+      .picker {
+        cursor: pointer;
+      }
+
+      .react-datepicker {
+        color: var(--primary-blue);
+      }
+
+      .react-datepicker__day--selected {
+        background-color: var(--primary-purple);
+      }
+
+      .react-datepicker-wrapper {
+        padding-left: 6px;
+        z-index: 1;
+        width: 100%;
+        .react-datepicker__input-container {
+          display: flex;
+          align-items: center;
+
+          input {
+            padding: 0;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+            color: var(--primary-purple);
+          }
+        }
       }
     }
+
+    // span:last-child {
+    //   display: flex;
+    //   align-items: center;
+    //   margin-left: auto;
+    //   margin-right: 0;
+    //   img {
+    //     margin-top: 1.5px;
+    //     width: 12px;
+    //     height: 12px;
+    //   }
+
+    //   p:nth-child(2) {
+    //     padding: 0 6px 0 4px;
+    //   }
+    // }
   }
 
   .tradeList {
