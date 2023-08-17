@@ -36,9 +36,12 @@ const UserPosts = ({ currentTab }) => {
       if (isFetchingNextPage) return;
 
       if (intObserver.current) intObserver.current.disconnect();
-
       intObserver.current = new IntersectionObserver((posts) => {
-        if (posts[0].isIntersecting && hasNextPage) {
+        if (
+          posts[0].isIntersecting &&
+          hasNextPage &&
+          data.pages[0].length >= 20
+        ) {
           console.log('We are near the last post');
           fetchNextPage();
         }
@@ -46,7 +49,7 @@ const UserPosts = ({ currentTab }) => {
 
       if (post) intObserver.current.observe(post);
     },
-    [isFetchingNextPage, fetchNextPage, hasNextPage]
+    [isFetchingNextPage, fetchNextPage, hasNextPage, data]
   );
 
   // 確認錯誤
