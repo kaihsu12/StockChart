@@ -108,14 +108,16 @@ const DiaryPage = () => {
 
       const temData = res.transactions
         ?.map((item) => {
-          if (item.status === 'open' || item.category === 'closing_position') {
-            return null;
+          if (
+            item.status === 'closed' &&
+            item.category === 'closing_position'
+          ) {
+            return {
+              date: item.transaction_date.slice(5, 10),
+              pandl: item.pandl ?? 0,
+            };
           }
-
-          return {
-            date: item.transaction_date.slice(5, 10),
-            pandl: item.pandl ?? 0,
-          };
+          return null;
         })
         .filter(Boolean); // 使用 filter 方法來過濾掉值為 null 的項目
 
