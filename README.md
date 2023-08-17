@@ -7,7 +7,7 @@
 ![](./public/screenshot2.png)
 ![](./public/screenshot3.png)
 ![](./public/screenshot4.png)
-![](./public/screenshot4.png)
+![](./public/screenshot5.png)
 
 ## 功能說明
 
