@@ -13,6 +13,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.svg';
 // styles
 import './LoginPage.scss';
+// api
+import { gooleLogin } from '../../api/auth';
 
 const LoginPage = () => {
   const [account, setAccount] = useState('');
@@ -47,8 +49,16 @@ const LoginPage = () => {
     }
   };
   const handleRegister = async () => {
-     navigate('/signup');
-  }
+    navigate('/signup');
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await gooleLogin();
+    } catch (error) {
+      console.error('[Login Failed]:', error);
+    }
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -83,6 +93,10 @@ const LoginPage = () => {
         <div className='buttonContainer'>
           <PurpleButton text={'登入'} onClick={handleLogin}></PurpleButton>
           <WhiteButton text={'立刻註冊'} onClick={handleRegister}></WhiteButton>
+          <WhiteButton
+            text={'Google登入'}
+            onClick={handleGoogleLogin}
+          ></WhiteButton>
         </div>
       </div>
     </div>
