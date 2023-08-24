@@ -24,6 +24,19 @@ export const login = async ({ account, password }) => {
   }
 };
 
+export const gooleLogin = async () => {
+  try {
+    const data = await axios.get(`${authURL}/auth/google`);
+
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.error('[Login Failed]:', error);
+    return { success: false, error };
+  }
+};
+
 export const register = async ({
   account,
   username,
