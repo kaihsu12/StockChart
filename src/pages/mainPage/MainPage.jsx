@@ -15,18 +15,24 @@ import './MainPage.scss';
 export const MainPage = () => {
   const [currentTab, setCurrentTab] = useState('all');
   const [posts, setPosts] = useState(<AllPosts currentTab={currentTab} />);
+  const [googleAuth, setGoogleAuth] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const googleAuth =
-      urlParams.has('isAuthenticated') &&
-      urlParams.get('isAuthenticated') === 'true';
+
+    if (urlParams.has('isAuthenticated')) {
+      const isAuthenticated = urlParams.get('isAuthenticated') === 'true';
+      if (isAuthenticated) {
+        setGoogleAuth(true);
+      }
+    }
+
     if (!isAuthenticated && !googleAuth) {
       navigate('/login');
     }
-  }, [navigate, isAuthenticated]);
+  }, [navigate, isAuthenticated, googleAuth]);
 
   return (
     <>
