@@ -28,7 +28,7 @@ export const gooleLogin = async () => {
   try {
     const data = await axios.get(`${authURL}/auth/google`);
 
-    console.log(data);
+    //console.log(data);
 
     return data;
   } catch (error) {
