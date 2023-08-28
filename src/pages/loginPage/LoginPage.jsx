@@ -13,15 +13,13 @@ import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.svg';
 // styles
 import './LoginPage.scss';
-// api
-import { gooleLogin } from '../../api/auth';
 
 const LoginPage = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, gooleLogin } = useAuth();
 
   const handleLogin = async () => {
     try {
