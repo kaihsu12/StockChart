@@ -26,7 +26,7 @@ export const login = async ({ account, password }) => {
 
 export const gooleLogin = async () => {
   try {
-    await axios.get(`${authURL}/auth/google`);
+    window.location.href = `${authURL}/auth/google`;
     const urlParams = new URLSearchParams(window.location.search);
     const isAuthenticated =
       urlParams.has('isAuthenticated') &&
