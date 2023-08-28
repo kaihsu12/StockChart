@@ -19,7 +19,11 @@ export const MainPage = () => {
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const googleAuth =
+      urlParams.has('isAuthenticated') &&
+      urlParams.get('isAuthenticated') === 'true';
+    if (!isAuthenticated && !googleAuth) {
       navigate('/login');
     }
   }, [navigate, isAuthenticated]);

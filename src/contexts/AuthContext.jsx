@@ -82,19 +82,6 @@ export const AuthProvider = ({ children }) => {
           }
           return success;
         },
-
-        gooleLogin: async (data) => {
-          const success = await gooleLogin();
-          if (success) {
-            //setPayload(tempPayload);
-            setIsAuthenticated(true);
-            //localStorage.setItem('authToken', token);
-          } else {
-            setPayload(null);
-            setIsAuthenticated(false);
-          }
-          return success;
-        },
         logout: () => {
           localStorage.removeItem('authToken');
           setPayload(null);
