@@ -26,11 +26,12 @@ export const login = async ({ account, password }) => {
 
 export const gooleLogin = async () => {
   try {
-    const data = await axios.get(`${authURL}/auth/google`);
-
-    //console.log(data);
-
-    return data;
+    await axios.get(`${authURL}/auth/google`);
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAuthenticated =
+      urlParams.has('isAuthenticated') &&
+      urlParams.get('isAuthenticated') === 'true';
+    return isAuthenticated;
   } catch (error) {
     console.error('[Login Failed]:', error);
     return { success: false, error };

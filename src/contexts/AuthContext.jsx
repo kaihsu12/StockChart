@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 // package
 import { decodeToken } from 'react-jwt';
 // api
-import { login, register } from '../api/auth';
+import { login, register, gooleLogin } from '../api/auth';
 
 const defaultAuthContext = {
   isAuthenticated: false, // 使用者是否登入的判斷依據，預設為 false，若取得後端的有效憑證，則切換為 true
@@ -82,12 +82,26 @@ export const AuthProvider = ({ children }) => {
           }
           return success;
         },
+
+        gooleLogin: async (data) => {
+          const success = await gooleLogin();
+          if (success) {
+            //setPayload(tempPayload);
+            setIsAuthenticated(true);
+            //localStorage.setItem('authToken', token);
+          } else {
+            setPayload(null);
+            setIsAuthenticated(false);
+          }
+          return success;
+        },
         logout: () => {
           localStorage.removeItem('authToken');
           setPayload(null);
           setIsAuthenticated(false);
         },
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
