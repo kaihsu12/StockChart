@@ -13,8 +13,8 @@ export const login = async ({ account, password }) => {
 
     console.log(data);
 
-    const { token } = data;
-    if (token) {
+    const { accessToken } = data;
+    if (accessToken) {
       return { success: true, ...data };
     }
     return data;

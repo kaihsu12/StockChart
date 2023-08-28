@@ -67,15 +67,15 @@ export const AuthProvider = ({ children }) => {
           return success;
         },
         login: async (data) => {
-          const { success, token } = await login({
+          const { success, accessToken } = await login({
             account: data.account,
             password: data.password,
           });
-          const tempPayload = decodeToken(token);
+          const tempPayload = decodeToken(accessToken);
           if (tempPayload) {
             setPayload(tempPayload);
             setIsAuthenticated(true);
-            localStorage.setItem('authToken', token);
+            localStorage.setItem('authToken', accessToken);
           } else {
             setPayload(null);
             setIsAuthenticated(false);
