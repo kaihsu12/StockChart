@@ -33,6 +33,7 @@ export const MainPage = () => {
 
     if (!isAuthenticated && !googleAuth) {
       navigate('/login');
+      console.log('go back to login');
     }
   }, [navigate, isAuthenticated, googleAuth]);
 
