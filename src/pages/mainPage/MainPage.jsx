@@ -29,6 +29,8 @@ export const MainPage = () => {
       }
     }
 
+    console.log(googleAuth);
+
     if (!isAuthenticated && !googleAuth) {
       navigate('/login');
     }
