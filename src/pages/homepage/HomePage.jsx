@@ -6,13 +6,19 @@ const HomePage = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/main');
-    } else {
-      navigate('/login');
-    }
-  }, [navigate, isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     navigate('/main');
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // }, [navigate, isAuthenticated]);
+
+  return (
+    <div>
+      <p>homepage</p>
+    </div>
+  );
 };
 
 export default HomePage;
