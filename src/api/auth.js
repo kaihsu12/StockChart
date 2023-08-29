@@ -27,6 +27,10 @@ export const login = async ({ account, password }) => {
 export const gooleLogin = async () => {
   try {
     window.location.href = `${authURL}/auth/google`;
+    await axios.post(`${authURL}/auth/google`, {
+      withCredentials: true,
+    });
+
     return { success: true };
   } catch (error) {
     console.error('[Login Failed]:', error);
