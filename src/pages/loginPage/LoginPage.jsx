@@ -58,11 +58,11 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/main');
-    }
-  }, [navigate, isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     navigate('/main');
+  //   }
+  // }, [navigate, isAuthenticated]);
 
   return (
     <div className='container'>

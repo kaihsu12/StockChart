@@ -74,11 +74,11 @@ const SettingPage = () => {
     console.log(res);
   };
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigate('/login');
-  //   }
-  // }, [navigate, isAuthenticated]);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <div className='settingPage'>
