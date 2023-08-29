@@ -13,13 +13,15 @@ import logo from '../../assets/logo.svg';
 import googleLogo from '../../assets/google-icon.svg';
 // styles
 import './LoginPage.scss';
+// Api
+import { gooleLogin } from '../../api/auth';
 
 const LoginPage = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const { login, isAuthenticated, gooleLogin } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   const handleLogin = async () => {
     try {
