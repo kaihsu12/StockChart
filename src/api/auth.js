@@ -27,7 +27,8 @@ export const login = async ({ account, password }) => {
 export const gooleLogin = async () => {
   try {
     window.location.href = `${authURL}/auth/google`;
-    return true;
+    const success = { success: true };
+    return success;
   } catch (error) {
     console.error('[Login Failed]:', error);
     return { success: false, error };
