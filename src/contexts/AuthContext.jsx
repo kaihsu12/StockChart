@@ -22,21 +22,21 @@ export const AuthProvider = ({ children }) => {
   const [payload, setPayload] = useState(null);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    const checkTokenIsValid = async () => {
-      const authToken = localStorage.getItem('authToken');
-      if (authToken) {
-        setIsAuthenticated(true);
-        const tempPayload = decodeToken(authToken);
-        setPayload(tempPayload);
-      } else {
-        setIsAuthenticated(false);
-        setPayload(null);
-      }
-    };
+  // useEffect(() => {
+  //   const checkTokenIsValid = async () => {
+  //     const authToken = localStorage.getItem('authToken');
+  //     if (authToken) {
+  //       setIsAuthenticated(true);
+  //       const tempPayload = decodeToken(authToken);
+  //       setPayload(tempPayload);
+  //     } else {
+  //       setIsAuthenticated(false);
+  //       setPayload(null);
+  //     }
+  //   };
 
-    checkTokenIsValid();
-  }, [pathname]);
+  //   checkTokenIsValid();
+  // }, [pathname]);
 
   return (
     <AuthContext.Provider
@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) => {
           return success;
         },
         gooleLogin: async () => {
-          const success = await gooleLogin();
+          const { success } = await gooleLogin();
           if (success) {
             setIsAuthenticated(true);
           } else {
