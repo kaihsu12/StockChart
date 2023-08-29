@@ -10,7 +10,7 @@ const HomePage = () => {
     if (isAuthenticated) {
       navigate('/main');
     } else {
-      navigate('/authtest');
+      navigate('/login');
     }
   }, [navigate, isAuthenticated]);
 };
