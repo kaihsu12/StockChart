@@ -27,31 +27,31 @@ const LoginPage = () => {
     console.log('Current cookies: ', document.cookie);
   };
 
-  const handleLogin = async () => {
-    try {
-      const success = await login({
-        account,
-        password,
-      });
-      if (success) {
-        Swal.fire({
-          position: 'top',
-          title: '登入成功!',
-          icon: 'success',
-          showConfirmButton: true,
-        });
-        return;
-      }
-      Swal.fire({
-        position: 'top',
-        title: '登入失敗!',
-        icon: 'error',
-        showConfirmButton: true,
-      });
-    } catch (error) {
-      console.error('[Login Failed]:', error);
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     const success = await login({
+  //       account,
+  //       password,
+  //     });
+  //     if (success) {
+  //       Swal.fire({
+  //         position: 'top',
+  //         title: '登入成功!',
+  //         icon: 'success',
+  //         showConfirmButton: true,
+  //       });
+  //       return;
+  //     }
+  //     Swal.fire({
+  //       position: 'top',
+  //       title: '登入失敗!',
+  //       icon: 'error',
+  //       showConfirmButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.error('[Login Failed]:', error);
+  //   }
+  // };
   const handleRegister = async () => {
     navigate('/signup');
   };
@@ -101,7 +101,7 @@ const LoginPage = () => {
           />
         </div>
         <div className='buttonContainer'>
-          <PurpleButton text={'登入'} onClick={handleLogin}></PurpleButton>
+          <PurpleButton text={'登入'} onClick=''></PurpleButton>
           <button
             className='googleBtn secondary-button'
             onClick={handleGoogleLogin}
